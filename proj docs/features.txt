@@ -1,0 +1,19 @@
+FEATURES
+
+REGISTER
+LOGIN
+	- PROFILE
+		-username
+		-password
+		-displayname(para ma challenge ka pangitag auto generator na library paras displayname or else buhat kag logic max of char 20 lang)
+		-karma(this will show total likes. Karma is likes sa reddit)
+	- POST on subreddit or profile
+		-title
+		-body
+		-flare
+	- CREATE SUBREDDIT
+		-subreddit name
+		-rules
+	- MANAGE SUBREDDIT
+		-edit subreddit name
+		-edit rules

@@ -3,9 +3,7 @@ import Layout from '@/components/Layout';
 function App() {
 	return (
 		<Layout>
-			<div className='bg-background '>
-				<Button variant='destructive'>Destructive2</Button>
-			</div>
+			 <h1 className='text-foreground mx-auto p-4'>Main Content</h1>
 		</Layout>
 	);
 }

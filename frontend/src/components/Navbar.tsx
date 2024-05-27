@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Tooltip from "@/components/Tooltip.tsx";
+import Modal from "./Modal";
 import reddit from "@/assets/reddit.svg";
 import mouse from "@/assets/mouse.svg";
 import message from "@/assets/message.svg";
@@ -14,6 +15,7 @@ import qrcode from "@/assets/qrcode.svg";
 function Navbar() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
+  const [loginModal, setLoginModal] = useState<boolean>(false);
   const toggleKebabMenu = () => {
     setIsKebabClicked(!isKebabClicked);
   };
@@ -85,16 +87,31 @@ function Navbar() {
                 </div>
                 {isKebabClicked && (
                   <div className="absolute right-0  mt-5 w-64 bg-[#181c1f] text-white rounded shadow-lg py-2 px-2">
-                    <div className="p-2  cursor-pointer flex">
-                      <img src={mouse} alt="mousecursor" className="w-7 h-7 mr-2" />
+                    <div
+                      className="p-2  cursor-pointer flex"
+                      onClick={() => setLoginModal(!loginModal)}
+                    >
+                      <img
+                        src={mouse}
+                        alt="mousecursor"
+                        className="w-7 h-7 mr-2"
+                      />
                       Log In / Sign Up
                     </div>
-                    <div className="p-2  cursor-pointer flex">
-                      <img src={mouse} alt="mousecursor" className="w-7 h-7 mr-2" />
+                    <div className="p-2  cursor-pointer flex focus:bg-gray-100">
+                      <img
+                        src={mouse}
+                        alt="mousecursor"
+                        className="w-7 h-7 mr-2"
+                      />
                       Advertise on Reddit
                     </div>
                     <div className="p-2  cursor-pointer flex">
-                      <img src={mouse} alt="mousecursor" className="w-7 h-7 mr-2" />
+                      <img
+                        src={mouse}
+                        alt="mousecursor"
+                        className="w-7 h-7 mr-2"
+                      />
                       Shop Collectible Avatars
                     </div>
                   </div>
@@ -104,6 +121,7 @@ function Navbar() {
           </div>
         )}
       </div>
+     {loginModal && <Modal />}
     </nav>
   );
 }

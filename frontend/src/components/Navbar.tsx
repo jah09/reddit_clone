@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Tooltip from "@/components/Tooltip.tsx";
-import Modal from "./Modal";
+import LoginModal from "./Modal";
 import reddit from "@/assets/reddit.svg";
 import mouse from "@/assets/mouse.svg";
 import message from "@/assets/message.svg";
@@ -121,7 +121,7 @@ function Navbar() {
           </div>
         )}
       </div>
-     {loginModal && <Modal />}
+     {loginModal && <LoginModal />}
     </nav>
   );
 }

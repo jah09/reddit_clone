@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/Button';
 import Layout from '@/components/Layout';
 import LoginModal from './components/LoginModal';
 import SignupModal from './components/SignupModal';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 	return (
@@ -10,10 +10,7 @@ function App() {
 			<Layout>
 			<Routes>
 			<Route path="/login"  element={<LoginModal />}/>
-			<Route path="/signup"  element={<SignupModal />}/>
-
-					
-				
+			<Route path="/signup"  element={<SignupModal />}/>	
 			</Routes>
 			</Layout>
 		</BrowserRouter>

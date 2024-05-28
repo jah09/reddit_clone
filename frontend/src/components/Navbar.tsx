@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import Tooltip from "@/components/Tooltip.tsx";
-import LoginModal from "./LoginModal";
+ 
 import reddit from "@/assets/reddit.svg";
 import mouse from "@/assets/mouse.svg";
 import message from "@/assets/message.svg";
@@ -11,12 +10,12 @@ import profile from "@/assets/profile.jpg";
 import search from "@/assets/search.svg";
 import kebab from "@/assets/kebab.svg";
 import qrcode from "@/assets/qrcode.svg";
-import { BrowserRouter, Routes, Route, Navigate,Link } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 
 function Navbar() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
   const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
-  const [loginModal, setLoginModal] = useState<boolean>(false);
+ 
   const toggleKebabMenu = () => {
     setIsKebabClicked(!isKebabClicked);
   };
@@ -92,15 +91,18 @@ function Navbar() {
                 {isKebabClicked && (
                   <div className="absolute right-0  mt-5 w-64 bg-[#181c1f] text-white rounded shadow-lg py-2 px-2">
                     <div
-                      className="p-2  cursor-pointer flex"
-                      onClick={() => setLoginModal(!loginModal)}
-                    >
+                      className="p-2  cursor-pointer flex "
+                      
+                      >
+                    
                       <img
                         src={mouse}
                         alt="mousecursor"
                         className="w-7 h-7 mr-2"
                       />
+                        <Link to="/login">
                       Log In / Sign Up
+                       </Link>
                     </div>
                     <div className="p-2  cursor-pointer flex focus:bg-gray-100">
                       <img
@@ -125,7 +127,7 @@ function Navbar() {
           </div>
         )}
       </div>
-     {loginModal && <LoginModal />}
+    
     </nav>
   );
 }

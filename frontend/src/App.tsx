@@ -1,10 +1,22 @@
 import { Button } from '@/components/ui/Button';
 import Layout from '@/components/Layout';
+import LoginModal from './components/LoginModal';
+import SignupModal from './components/SignupModal';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 function App() {
 	return (
-		<Layout>
-			 <h1 className='text-foreground mx-auto p-4'>Main Content</h1>
-		</Layout>
+		<BrowserRouter>
+			<Layout>
+			<Routes>
+			<Route path="/login"  element={<LoginModal />}/>
+			<Route path="/signup"  element={<SignupModal />}/>
+
+					
+				
+			</Routes>
+			</Layout>
+		</BrowserRouter>
 	);
 }
 

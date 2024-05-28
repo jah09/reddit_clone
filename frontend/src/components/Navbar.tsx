@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import Tooltip from "@/components/Tooltip.tsx";
-import LoginModal from "./Modal";
+import LoginModal from "./LoginModal";
 import reddit from "@/assets/reddit.svg";
 import mouse from "@/assets/mouse.svg";
 import message from "@/assets/message.svg";
@@ -11,6 +11,7 @@ import profile from "@/assets/profile.jpg";
 import search from "@/assets/search.svg";
 import kebab from "@/assets/kebab.svg";
 import qrcode from "@/assets/qrcode.svg";
+import { BrowserRouter, Routes, Route, Navigate,Link } from 'react-router-dom';
 
 function Navbar() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
@@ -72,9 +73,12 @@ function Navbar() {
                 </span>
                 Get app
               </button>
+              <Link to="/login">
+            
               <button className="text-foreground rounded-full bg-primary px-3 py-[6px] h-10">
                 Log In
               </button>
+                </Link>
               <div className="relative">
                 <div className="relative" onClick={toggleKebabMenu}>
                   {/* <span className="absolute inset-0 bg-blue-500 rounded-full opacity-50 w-full h-full"></span> */}

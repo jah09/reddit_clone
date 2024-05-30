@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link ,useNavigate} from "react-router-dom";
 import axios from "axios";
-import close from "../assets/close.svg";
+import close from '../../assets/close.svg'
 import { generateUsername } from "unique-username-generator";
 import { Input } from "@/components/ui/input";
 import Modal from 'react-modal';

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Link, useNavigate } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
-import close from '../assets/close.svg';
+import close from '../../assets/close.svg'
+
 interface FormData {
 	username: string;
 	password: string;

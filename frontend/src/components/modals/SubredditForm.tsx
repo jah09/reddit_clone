@@ -54,14 +54,20 @@ function SubredditForm() {
                   <p className="flex justify-end mr-4 text-gray-400">0</p>
                 </div>
                 <div className="py-4">
-                  <textarea
+                  <div className="flex justify-between ">
+                    <h5 className="text-foreground  font-medium">
+                      Add rules to your community
+                    </h5>
+                    <button className="text-foreground font-bold text-xl bg-red-900  py-0.5  px-2.5 rounded-full mr-2">+</button>
+                  </div>
+
+                  {/* <textarea
                     autoComplete="off"
                     name="description"
                     id="description"
                     placeholder="Description"
                     className="px-4  rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] h-44 flex py-4 resize-none"
-                  />
-                  <p className="flex justify-end mr-4 text-gray-400">0</p>
+                  /> */}
                 </div>
               </div>
               <div className=" w-[40%]  ">

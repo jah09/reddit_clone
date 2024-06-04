@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import close from "../../assets/close.svg";
 import add from "../../assets/add.svg";
 import { v4 as uuidv4 } from "uuid";
@@ -10,6 +10,7 @@ interface Rule {
 }
 
 interface SubReddit {
+  id: string;
   name: string;
   creatorId: string;
   rules: Rule[];
@@ -18,6 +19,7 @@ interface SubReddit {
 function SubredditForm() {
   //form data
   const [formData, setFormData] = useState<SubReddit>({
+    id: uuidv4(),
     name: "",
     creatorId: uuidv4(), // Set initial value
     rules: [{ id: uuidv4(), value: "" }],
@@ -31,37 +33,41 @@ function SubredditForm() {
     navigate("/");
   }
 
-  //handleAddNewRule
+  //handleAddNewRule -> click the btn then it will add new rule input
   const handleAddNewRule = () => {
     if (formData.rules.length < 3) {
       const nextRuleId = uuidv4();
       setFormData({
-        ...formData,
+        ...formData, //...formData: Spreads the existing properties of formData to keep them.
+        //rules: [...formData.rules, { ... }]: Creates a new rules array
+        //formData.rules: Includes all existing rules.
         rules: [...formData.rules, { id: nextRuleId, value: "" }],
       });
     }
-      
-      //  setFormData((prevData) => ({
-      //    ...prevData,
-      //    rules: [...prevData.rules, { id:  uuidv4(), value: "" }], // New rule with UUID
-      //  }));
-      
   };
 
-  //handleInputchange
-  const handleInputchange = (e: React.ChangeEvent<HTMLInputElement>, index:Number) => {
+  //handleInputchange for the community name
+  const handleInputchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-
-      // rules: prevData.rules.map((rule, i) =>
-      //   i === index ? { ...rule, value: e.target.value } : rule
-      // ),
     }));
   };
-  //handle submit bttn
 
+  //handle onchange for the rules
+  const handleInputChangeRule = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    ruleIndex: number
+  ) => {
+    const newRules = formData.rules.map((rule, index) =>
+      index === ruleIndex ? { ...rule, value: event.target.value } : rule
+    );
+
+    setFormData({ ...formData, rules: newRules });
+  };
+
+  //handle submit bttn
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
@@ -106,6 +112,7 @@ function SubredditForm() {
                 <div className="  w-[55%]">
                   <div>
                     <input
+                      required
                       type="text"
                       autoComplete="off"
                       name="name"
@@ -137,10 +144,11 @@ function SubredditForm() {
                           key={rule.id} // Key is now the unique rule ID
                           type="text"
                           name={rule.id}
+                          required
                           id={rule.id}
                           placeholder={`Rule ${index + 1}`}
                           value={rule.value}
-                          onChange={(e) => handleInputchange(e, index)}
+                          onChange={(e) => handleInputChangeRule(e, index)}
                           className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
                         />
                       ))}
@@ -166,7 +174,18 @@ function SubredditForm() {
                 >
                   Cancel
                 </button>
-                <button className="bg-[#24282a] py-2 px-4 rounded-full font-medium text-foreground mr-2">
+                <button
+                  disabled={
+                    !formData.name ||
+                    formData.rules.every((rule) => !rule.value)
+                  }
+                  className={
+                    !formData.name ||
+                    formData.rules.every((rule) => !rule.value)
+                      ? "bg-[#24282a] py-2 px-4 rounded-full font-medium text-foreground mr-2 cursor-no-drop"
+                      : "bg-[#2a3236] py-2 px-4 rounded-full font-medium text-foreground mr-2"
+                  }
+                >
                   Submit
                 </button>
               </div>

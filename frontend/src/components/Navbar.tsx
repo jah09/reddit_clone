@@ -1,29 +1,28 @@
-import { useState } from 'react';
- 
+import { useState } from "react";
 
-import reddit from '@/assets/reddit.svg';
-import mouse from '@/assets/mouse.svg';
-import message from '@/assets/message.svg';
-import plus from '@/assets/plus.svg';
-import bell from '@/assets/bell.svg';
-import profile from '@/assets/profile.jpg';
-import search from '@/assets/search.svg';
-import kebab from '@/assets/kebab.svg';
-import qrcode from '@/assets/qrcode.svg';
-import shoppingbag from '@/assets/shoppingbag.svg';
+import reddit from "@/assets/reddit.svg";
+import mouse from "@/assets/mouse.svg";
+import message from "@/assets/message.svg";
+import plus from "@/assets/plus.svg";
+import bell from "@/assets/bell.svg";
+import profile from "@/assets/profile.jpg";
+import search from "@/assets/search.svg";
+import kebab from "@/assets/kebab.svg";
+import qrcode from "@/assets/qrcode.svg";
+import shoppingbag from "@/assets/shoppingbag.svg";
 
-import login from '@/assets/login.svg';
+import login from "@/assets/login.svg";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Navbar() {
-	const [isLogin, setIsLogin] = useState<boolean>(false);
-	const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
+  const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
 
-	const toggleKebabMenu = () => {
-		setIsKebabClicked(!isKebabClicked);
-	};
-	return (
+  const toggleKebabMenu = () => {
+    setIsKebabClicked(!isKebabClicked);
+  };
+  return (
     <nav className="w-full py-2 px-3 bg-background border-b border-gray-800   ">
       <div className="flex justify-between">
         <div className="text-3xl font-bold  text-foreground  flex  items-center gap-x-2 justify-start ">
@@ -54,10 +53,16 @@ function Navbar() {
               <div>
                 <img src={message} alt="mousecursor" className="w-7 h-7" />
               </div>
+              <Link to="/create-post"> 
+              <div className="flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer   ">
+                <div className="">
+                  {" "}
+                  <img src={plus} alt="mousecursor  " className="w-10 h-10" />
+                </div>
 
-              <img src={plus} alt="mousecursor ml-10" className="w-10 h-10" />
-              <h5 className=" text-foreground "> Create</h5>
-
+                <h5 className=" text-foreground px-2"> Create</h5>
+              </div>
+              </Link>
               <div className="">
                 <img src={bell} alt="mousecursor" className="w-7 h-7" />
               </div>

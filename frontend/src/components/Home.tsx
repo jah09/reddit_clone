@@ -3,7 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <div className='text-foreground p-4'>
-      This is Home Page
+      Home page
     </div>
   )
 }

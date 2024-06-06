@@ -46,22 +46,27 @@ function Navbar() {
 
         {isLogin ? (
           <div className="  w-96 px-2">
-            <div className="flex gap-x-3 items-center  justify-end">
+            <div className="flex gap-x-3 items-center  justify-end  ">
               <div className=" ">
                 <img src={mouse} alt="mousecursor" className="w-7 h-7" />
               </div>
               <div>
                 <img src={message} alt="mousecursor" className="w-7 h-7" />
               </div>
-              <Link to="/create-post"> 
-              <div className="flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer   ">
+
+              {/* <div className="flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer   ">
                 <div className="">
                   {" "}
                   <img src={plus} alt="mousecursor  " className="w-10 h-10" />
                 </div>
 
                 <h5 className=" text-foreground px-2"> Create</h5>
-              </div>
+              </div> */}
+              <Link to="/create-post"> 
+              <button className="text-foreground px-3 flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer">
+                <img src={plus} alt="mousecursor  " className="w-10 h-10" />
+                <span>Create</span>
+              </button>
               </Link>
               <div className="">
                 <img src={bell} alt="mousecursor" className="w-7 h-7" />

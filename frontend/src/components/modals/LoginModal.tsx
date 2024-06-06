@@ -82,7 +82,7 @@ function LoginModal() {
                   name="password"
                   id="password"
                   placeholder="Password"
-                  className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 mt-3"
+                  className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 mt-3 bg-[#2a3236]"
                 />
                 <p className="text-blue-600  mt-6">Forgot password?</p>
                 <p className="text-foreground py-4">
@@ -93,8 +93,9 @@ function LoginModal() {
                     </span>
                   </Link>
                 </p>
-
-                <button className="p-4 rounded-3xl w-full outline-none mt-10 bg-gray-600 cursor-pointer text-foreground  tracking-wide font-medium">
+                
+                <button className={!formData.username || !formData.password ?'p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-foreground  tracking-wide font-medium cursor-no-drop'  :'p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-foreground  tracking-wide font-medium' }
+                disabled={!formData.username ||  !formData.password}>
                   Log in
                 </button>
               </form>

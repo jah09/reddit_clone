@@ -8,12 +8,17 @@ interface Rule {
   id: string; // Use string IDs for flexibility
   value: string;
 }
+interface Flare {
+  id: string; // Use string IDs for flexibility
+  value: string;
+}
 
 interface SubReddit {
   id: string;
   name: string;
   creatorId: string;
   rules: Rule[];
+  flare: Flare[];
 }
 
 function SubredditForm() {
@@ -23,8 +28,9 @@ function SubredditForm() {
     name: "",
     creatorId: uuidv4(), // Set initial value
     rules: [{ id: uuidv4(), value: "" }],
+    flare: [{ id: uuidv4(), value: "" }],
   });
-
+  console.log("the formdata", formData);
   const navigate = useNavigate();
   //modal
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
@@ -58,13 +64,38 @@ function SubredditForm() {
   //handle onchange for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    ruleIndex: number
+    newIndex: number
   ) => {
+    //new rules
     const newRules = formData.rules.map((rule, index) =>
-      index === ruleIndex ? { ...rule, value: event.target.value } : rule
+      index === newIndex ? { ...rule, value: event.target.value } : rule
+    );
+    setFormData({ ...formData, rules: newRules });
+  };
+  //handle onchange for the flare
+  const handleInputAddFlare = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    newIndex: number
+  ) => {
+    //new flare
+    const newflare = formData.flare.map((flare, index) =>
+      index === newIndex ? { ...flare, value: event.target.value } : flare
     );
 
-    setFormData({ ...formData, rules: newRules });
+    setFormData({ ...formData, flare: newflare });
+  };
+
+  //handle add flare-> click the btn then it will add a flare
+  const handleAddFlare = () => {
+    if (formData.flare.length < 3) {
+      const nextFlareId = uuidv4();
+      setFormData({
+        ...formData, //...formData: Spreads the existing properties of formData to keep them.
+        //flare: [...formData.flare, { ... }]: Creates a new flare array
+        //formData.flare: Includes all existing flare.
+        flare: [...formData.flare, { id: nextFlareId, value: "" }],
+      });
+    }
   };
 
   //handle submit bttn
@@ -78,12 +109,12 @@ function SubredditForm() {
     } catch (error) {}
   };
   return (
-    <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
+    <div className=" sm:p-0 ">
       <Modal
-        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl"
+        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl oveflow-hidden"
         isOpen={modalIsOpen}
       >
-        <div className="inline-block text-left bg-[#181c1f] min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-5 sm:align-middle w-3/5 mt-8">
+        <div className="inline-block text-left bg-[#181c1f] max-h-[90vh] rounded-xl  align-bottom transition-all transform shadow-2xl p-5 sm:align-middle w-3/5 mt-8  overflow-auto custom-y-scrollbar">
           <div className="flex ">
             <div className="flex flex-1 flex-col ">
               <h1 className="text-foreground font-bold text-2xl">
@@ -152,6 +183,36 @@ function SubredditForm() {
                           className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
                         />
                       ))}
+                    </div>
+                    <div className="mt-4">
+                      <div className="flex justify-between ">
+                        <h5 className="text-foreground  font-medium">
+                          Add flare
+                        </h5>
+
+                        <button
+                          onClick={handleAddFlare}
+                          type="button"
+                          className=" text-white bg-[#2a3236]  focus:outline-none   font-medium rounded-full text-sm p-2.5  text-center inline-flex items-center me-2 "
+                        >
+                          <img src={add} alt="" className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="mt-4 ">
+                        {formData.flare.map((flare, key) => (
+                          <input
+                            key={flare.id} // Key is now the unique rule ID
+                            type="text"
+                            name={flare.id}
+                            required
+                            id={flare.id}
+                            placeholder={`Flare ${key + 1}`}
+                            value={flare.value}
+                            onChange={(e) => handleInputAddFlare(e, key)}
+                            className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
+                          />
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>

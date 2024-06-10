@@ -1,22 +1,47 @@
 import React, { useState } from "react";
 import arrowdown from "../assets/arrowdown.svg";
-interface FormData {
+import TagModal from "./modals/TagModal";
+interface Post {
   title: string;
-  description: string;
   subRedditId: string;
+  flareId: string;
+  body: string;
 }
 function CreatePost() {
   //defining the formData
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<Post>({
+    body: "",
     title: "",
-    description: "",
-    subRedditId:''
+    subRedditId: "1",
+    flareId: "",
   });
+  //modal
+  const [showModal, setIsShowModal] = useState<boolean>(false);
 
   //handle form submit
-  const handleFormSubmit = () => {
-    
-  }
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("form", formData);
+  };
+
+  //get the data input by the user handleTextareaChange
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  //get the data input by the user handleTextareaChange
+
+  const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className=" ">
       <div className="py-6 px-10">
@@ -33,7 +58,9 @@ function CreatePost() {
                 {" "}
                 <input
                   type="text"
-                  id="searc"
+                  id="search"
+                  value={formData.flareId}
+                  onChange={handleInputChange}
                   name="search"
                   className="rounded-full py-2 px-3 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50 "
                   placeholder="Select a community"
@@ -58,9 +85,11 @@ function CreatePost() {
                   <input
                     required
                     type="text"
+                    onChange={handleInputChange}
                     autoComplete="off"
                     name="title"
                     id="title"
+                    value={formData.title}
                     placeholder="Title"
                     className="px-4 py-4 rounded-2xl outline-none text-foreground   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                   />
@@ -74,6 +103,7 @@ function CreatePost() {
                   <div>
                     {/* #1a1d1f  #24282a #2a3236*/}
                     <button
+                      onClick={()=>setIsShowModal(true)}
                       className={
                         formData.subRedditId
                           ? "bg-[#2a3236] text-sm text-foreground py-[5px] px-3 rounded-full"
@@ -88,6 +118,8 @@ function CreatePost() {
                     <textarea
                       name="body"
                       id="body"
+                      value={formData.body}
+                      onChange={handleTextareaChange}
                       placeholder="Body"
                       className="px-4 py-4 rounded-2xl outline-none text-foreground   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                     ></textarea>
@@ -106,6 +138,7 @@ function CreatePost() {
           </form>
         </div>
       </div>
+      {showModal && <TagModal />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import add from "../assets/add.svg";
-import barchart from "../assets/barchart.svg";
+import plus from "../../assets/plus.svg";
+import barchart from "../../assets/barchart.svg";
 
 import { Link } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
@@ -39,7 +39,7 @@ function Sidenav() {
           <div className="mt-2 hover:bg-[#181c1f]  hover:rounded-lg  ">
             <Link to="/create-subreddit-form">
               <button className="inline-flex items-center py-1 w-full">
-                <img src={add} alt="add icon " className="w-8 h-8 " />
+                <img src={plus} alt="add icon " className="w-8 h-8 " />
                 Create Community
               </button>
             </Link>

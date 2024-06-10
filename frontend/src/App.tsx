@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/Button";
-import Layout from "@/components/Layout";
+ 
+import Layout from "@/components/Nav/Layout";
 import LoginModal from "./components/modals/LoginModal";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
 import SignupModal from "./components/modals/SignupModal";
 import SubredditForm from "./components/modals/SubredditForm";

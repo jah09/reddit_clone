@@ -244,7 +244,7 @@ function SubredditForm() {
                     !formData.name ||
                     formData.rules.every((rule) => !rule.value)
                       ? "bg-[#24282a] py-2 px-4 rounded-full font-medium text-foreground mr-2 cursor-no-drop"
-                      : "bg-[#d93900] py-2 px-4 rounded-full font-medium text-foreground mr-2"
+                      : "bg-blue-600 py-2 px-4 rounded-full font-medium text-foreground mr-2"
                   }
                 >
                   Submit

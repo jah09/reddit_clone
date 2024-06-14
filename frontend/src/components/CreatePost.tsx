@@ -67,12 +67,13 @@ function CreatePost() {
                 </div>
                 <div>
                   <input
+                 
                     type="text"
                     id="search"
                     value={formData.flareId}
                     onChange={handleInputChange}
                     name="search"
-                    className="rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50 w-56 "
+                    className="rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50 w-56  "
                     placeholder="Select a community"
                   />
                 </div>

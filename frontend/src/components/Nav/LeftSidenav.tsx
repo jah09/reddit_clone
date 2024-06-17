@@ -1,25 +1,45 @@
 import React from "react";
-import plus from "../../assets/plus.svg";
+import { IoMdAdd } from "react-icons/io";
 import barchart from "../../assets/barchart.svg";
-
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
-import { LuArrowUpRightFromCircle } from "react-icons/lu";
+import { CgArrowTopRightO } from "react-icons/cg";
+ 
 function Sidenav() {
   return (
     <div className="  p-4 h-full text-foreground  border-r border-gray-800">
       <div className=" ">
         <ul>
-          <li className="py-2 px-4  hover:bg-[#181c1f]  hover:rounded-lg  cursor-pointer flex  items-center ">
-            <AiFillHome className="w-6 h-6" />
-            <span className="ml-3">Home</span>
-          </li>
-          <li className="py-2 px-4  hover:bg-[#181c1f]  hover:rounded-lg  cursor-pointer flex  items-center ">
-            <LuArrowUpRightFromCircle className="w-6 h-6" />
+          <NavLink to="/">
+            {({ isActive }) => (
+              <li
+                className={
+                  isActive
+                    ? "py-2 px-4 bg-[#181c1f] rounded-lg cursor-pointer flex items-center"
+                    : "py-2 px-4 hover:bg-[#181c1f] hover:rounded-lg cursor-pointer flex items-center"
+                }
+              >
+                <AiFillHome className="w-6 h-6" />
+                <span className="ml-3">Home</span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink to="/popular">
+            {({ isActive }) => (
+              <li
+                className={
+                  isActive
+                    ? "py-2 px-4 bg-[#181c1f] rounded-lg cursor-pointer flex items-center  mt-0.5"
+                    : "py-2 px-4 hover:bg-[#181c1f] hover:rounded-lg cursor-pointer flex items-center  mt-0.5"
+                }
+              >
+                <CgArrowTopRightO className="w-6 h-6 text-foreground" />
+                <span className="ml-3">Popular</span>
+              </li>
+            )}
+          </NavLink>
 
-            <span className="ml-3">Popular</span>
-          </li>
-          <li className="py-2 px-4  hover:bg-[#181c1f]  hover:rounded-lg  cursor-pointer flex  items-center ">
+          <li className="py-2 px-4  hover:bg-[#181c1f]  hover:rounded-lg  cursor-pointer flex  items-center mt-0.5">
             <img src={barchart} alt="add icon ml-10" className="w-7 h-7" />
 
             <span className="ml-3">All</span>
@@ -39,7 +59,7 @@ function Sidenav() {
           <div className="mt-2 hover:bg-[#181c1f]  hover:rounded-lg  ">
             <Link to="/create-subreddit-form">
               <button className="inline-flex items-center py-1 w-full">
-                <img src={plus} alt="add icon " className="w-8 h-8 " />
+                <IoMdAdd className="w-8 h-8 " />
                 Create Community
               </button>
             </Link>

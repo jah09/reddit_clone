@@ -9,14 +9,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      "/api": {
-        // target: "http://localhost:4000", https://redditbackend-odpt.onrender.com
-         target: "https://redditbackend-odpt.onrender.com", 
-        changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, ""), // Corrected the syntax
-      },
-    },
-  },
-})
+ 
+});

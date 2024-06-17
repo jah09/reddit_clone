@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import search from "@/assets/search.svg";
- 
-import close from "../../assets/close.svg";
+import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
+
 interface TagModalProps {
-  onClose: () => void;  
+  onClose: () => void;
 }
 function TagModal({ onClose }: TagModalProps) {
   //modal
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
   function closeModal() {
     setModalIsOpen(false);
-    onClose()
+    onClose();
   }
-
- 
 
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
@@ -33,19 +30,13 @@ function TagModal({ onClose }: TagModalProps) {
               className="flex place-items-center  bg-[#2a3236] w-8 h-8 rounded-full "
               onClick={closeModal}
             >
-              {" "}
-              <img
-                src={close}
-                alt="closemodal"
-                className="w-6 h-6 mr-2 mx-1 cursor-pointer"
-              />{" "}
+              <IoCloseOutline className=" w-8 h-8  cursor-pointer text-white" />
             </div>
           </div>
           <div className="mt-4 ">
             <div className="justify-center flex  relative items-center mr-2">
               <div className="  absolute left-0 px-3">
-                {" "}
-                <img src={search} alt="" className="w-6 h-6" />
+                <IoSearchOutline className="w-6 h-6 text-white" />
               </div>
               <input
                 className="rounded-full px-11 text-foreground focus:outline-none min-w-[500px]  bg-[#2a3236] py-2"
@@ -59,7 +50,6 @@ function TagModal({ onClose }: TagModalProps) {
               <input
                 className="w-4 h-4"
                 type="radio"
-               
                 name="noFlare"
                 id="noFlare"
                 value="No flare"

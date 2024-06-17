@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import close from "../../assets/close.svg";
-import add from "../../assets/add.svg";
 import { v4 as uuidv4 } from "uuid";
+import { IoCloseOutline } from "react-icons/io5";
+ import { IoMdAdd } from "react-icons/io";
 interface Rule {
   id: string; // Use string IDs for flexibility
   value: string;
@@ -129,12 +129,7 @@ function SubredditForm() {
               className="flex place-items-center  bg-[#2a3236] w-8 h-8 rounded-full "
               onClick={closeModal}
             >
-              {" "}
-              <img
-                src={close}
-                alt="closemodal"
-                className="w-6 h-6 mr-2 mx-1 cursor-pointer"
-              />{" "}
+              <IoCloseOutline className=" w-8 h-8  cursor-pointer text-white" />
             </div>
           </div>
           <form action="" onSubmit={handleFormSubmit}>
@@ -166,7 +161,7 @@ function SubredditForm() {
                         type="button"
                         className=" text-white bg-[#2a3236]  focus:outline-none   font-medium rounded-full text-sm p-2.5  text-center inline-flex items-center me-2 "
                       >
-                        <img src={add} alt="" className="w-4 h-4" />
+                        <IoMdAdd className="w-4 h-4 " />
                       </button>
                     </div>
                     <div className="mt-4">
@@ -195,7 +190,7 @@ function SubredditForm() {
                           type="button"
                           className=" text-white bg-[#2a3236]  focus:outline-none   font-medium rounded-full text-sm p-2.5  text-center inline-flex items-center me-2 "
                         >
-                          <img src={add} alt="" className="w-4 h-4" />
+                          <IoMdAdd className="w-4 h-4 " />
                         </button>
                       </div>
                       <div className="mt-4 ">
@@ -226,7 +221,7 @@ function SubredditForm() {
                 </div>
               </div>
             </div>
-            <div className="mt-10  flex justify-between ">
+            <div className="mt-4  flex justify-between ">
               <div></div>
               <div className=" ">
                 <button

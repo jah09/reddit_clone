@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
-import close from "../../assets/close.svg";
+import { IoCloseOutline } from "react-icons/io5";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 interface FormData {
   username: string;
@@ -16,10 +17,22 @@ function LoginModal() {
   const navigate = useNavigate();
   //modal
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  function closeModal() {
+  const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false);
+  const [type, setType] = useState<string>("password");
+  const closeModal = () => {
     setModalIsOpen(false);
     navigate("/");
-  }
+  };
+  //handle show password
+  const handleShowPassword = () => {
+    if (type === "password") {
+      setIsPasswordShow(true);
+      setType("text");
+    } else {
+      setIsPasswordShow(false);
+      setType("password");
+    }
+  };
 
   //get the data input by the user
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,19 +48,14 @@ function LoginModal() {
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl"
         isOpen={modalIsOpen}
       >
-        <div className="inline-block text-left bg-[#181c1f] min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-14">
+        <div className="inline-block text-left bg-[#181c1f] min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-7">
           <div className="flex  ">
             <div className="flex flex-1  "></div>
             <div
               className="flex place-items-center  bg-[#2a3236] w-8 h-8 rounded-full "
               onClick={closeModal}
             >
-              {" "}
-              <img
-                src={close}
-                alt="closemodal"
-                className="w-6 h-6 mr-2 mx-1 cursor-pointer"
-              />{" "}
+              <IoCloseOutline className=" w-8 h-8  cursor-pointer text-white" />
             </div>
           </div>
           <div className="mt-4 px-12 ">
@@ -74,16 +82,30 @@ function LoginModal() {
                   className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
                 />
 
-                <input
-                  type="password"
-                  autoComplete="off"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  name="password"
-                  id="password"
-                  placeholder="Password"
-                  className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 mt-3 bg-[#2a3236]"
-                />
+                <div className="mt-3     relative">
+                  <input
+                    value={formData.password}
+                    type={type}
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    onChange={handleInputChange}
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
+                  />{" "}
+                  <span onClick={handleShowPassword}>
+                    {isPasswordShow ? (
+                      <IoMdEye
+                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
+                        color="#70757a"
+                      />
+                    ) : (
+                      <IoMdEyeOff
+                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
+                        color="#70757a"
+                      />
+                    )}
+                  </span>
+                </div>
                 <p className="text-blue-600  mt-6">Forgot password?</p>
                 <p className="text-foreground py-4">
                   New to Reddit?
@@ -93,9 +115,15 @@ function LoginModal() {
                     </span>
                   </Link>
                 </p>
-                
-                <button className={!formData.username || !formData.password ?'p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-foreground  tracking-wide font-medium cursor-no-drop'  :'p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-foreground  tracking-wide font-medium' }
-                disabled={!formData.username ||  !formData.password}>
+
+                <button
+                  className={
+                    !formData.username || !formData.password
+                      ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-foreground  tracking-wide font-medium cursor-no-drop"
+                      : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-foreground  tracking-wide font-medium"
+                  }
+                  disabled={!formData.username || !formData.password}
+                >
                   Log in
                 </button>
               </form>

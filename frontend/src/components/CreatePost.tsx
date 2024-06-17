@@ -66,6 +66,7 @@ function CreatePost() {
                 </div>
                 <div>
                   <input
+                 
                     type="text"
                     id="search"
                     value={formData.flareId}

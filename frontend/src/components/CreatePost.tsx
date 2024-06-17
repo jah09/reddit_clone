@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import arrowdown from "../assets/arrowdown.svg";
 import r_icon from "../assets/r_icon.png";
-
+import { IoIosArrowDown } from "react-icons/io";
 import TagModal from "./modals/TagModal";
 interface Post {
   title: string;
@@ -57,7 +56,7 @@ function CreatePost() {
           </div>
           <form action="" onSubmit={handleFormSubmit} className=" ">
             <div className="py-4  ">
-              <div className="relative   w-56 ">
+              <div className="relative   w-64 ">
                 <div className=" relative left-0 ">
                   <img
                     src={r_icon}
@@ -72,16 +71,13 @@ function CreatePost() {
                     value={formData.flareId}
                     onChange={handleInputChange}
                     name="search"
-                    className="rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50 w-56 "
+                    className="rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-64  "
                     placeholder="Select a community"
                   />
                 </div>
                 <div>
-                  <img
-                    src={arrowdown}
-                    alt=""
-                    className="w-4 h-4 absolute right-3 top-3 focus:hidden"
-                  />
+                  <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
+                 
                 </div>
               </div>
             </div>

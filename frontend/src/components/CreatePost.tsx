@@ -66,7 +66,6 @@ function CreatePost() {
                 </div>
                 <div>
                   <input
-                 
                     type="text"
                     id="search"
                     value={formData.flareId}
@@ -78,7 +77,6 @@ function CreatePost() {
                 </div>
                 <div>
                   <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
-                 
                 </div>
               </div>
             </div>
@@ -135,11 +133,11 @@ function CreatePost() {
                       className="px-4 py-4 rounded-2xl outline-none text-foreground   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                     ></textarea>
                     <div className="flex justify-end gap-x-2 mt-2">
-                      <button className="bg-[#24282a] py-2 px-3 rounded-full text-foreground font-semibold">
+                      <button className="bg-[#24282a] py-2 px-3 rounded-full text-foreground font-medium">
                         Save draft
                       </button>
                       <button
-                        className="bg-[#24282a] py-2 px-4 rounded-full text-foreground font-semibold"
+                        className="bg-[#24282a] py-2 px-4 rounded-full text-foreground font-medium"
                         type="submit"
                       >
                         Post

@@ -12,7 +12,7 @@ import { BsBoxArrowInRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function Navbar() {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
   const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
 
   const toggleKebabMenu = () => {
@@ -61,7 +61,7 @@ function Navbar() {
                 <img
                   src={profile}
                   alt="mousecursor"
-                  className="w-8 h-8 rounded-full"
+                  className="w-7 h-7 rounded-full"
                 />
               </div>
             </div>

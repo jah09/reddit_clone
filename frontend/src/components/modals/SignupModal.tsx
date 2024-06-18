@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import * as signUpAPI from '../../services/user';
 import { IoCloseOutline } from "react-icons/io5";
 import { GrPowerReset } from "react-icons/gr";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
@@ -57,7 +57,7 @@ function SignupModal() {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await axios.post("/api/auth/register", formData);
+      const response = await signUpAPI.signUp(formData);
       setIsLoading(false);
 
       console.log("signup response", response);

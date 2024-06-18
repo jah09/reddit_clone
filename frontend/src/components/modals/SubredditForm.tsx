@@ -111,6 +111,7 @@ function SubredditForm() {
   return (
     <div className=" sm:p-0 ">
       <Modal
+        appElement={document.getElementById("root")}
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl oveflow-hidden"
         isOpen={modalIsOpen}
       >

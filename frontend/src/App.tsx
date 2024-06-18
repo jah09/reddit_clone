@@ -1,7 +1,8 @@
- 
 import Layout from "@/components/Nav/Layout";
 import LoginModal from "./components/modals/LoginModal";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+
 import Popular from "./pages/Popular";
 
 import SignupModal from "./components/modals/SignupModal";
@@ -19,9 +20,10 @@ function App() {
           <Route path="/create-subreddit-form" element={<SubredditForm />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/popular" element={<Popular />} />
+          <Route path="/login" element={<LoginModal />} />
+          <Route path="/signup" element={<SignupModal />} />
         </Route>
-        <Route path="/login" element={<LoginModal />} />
-        <Route path="/signup" element={<SignupModal />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

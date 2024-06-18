@@ -58,7 +58,7 @@ function Sidenav() {
 
           <div className="mt-2 hover:bg-[#181c1f]  hover:rounded-lg  ">
             <Link to="/create-subreddit-form">
-              <button className="inline-flex items-center py-1 w-full">
+              <button className=" flex items-center py-1 w-full  ">
                 <IoMdAdd className="w-8 h-8 " />
                 Create Community
               </button>

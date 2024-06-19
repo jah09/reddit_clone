@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
- import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd } from "react-icons/io";
 interface Rule {
   id: string; // Use string IDs for flexibility
   value: string;
@@ -64,22 +64,22 @@ function SubredditForm() {
   //handle onchange for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     //new rules
     const newRules = formData.rules.map((rule, index) =>
-      index === newIndex ? { ...rule, value: event.target.value } : rule
+      index === newIndex ? { ...rule, value: event.target.value } : rule,
     );
     setFormData({ ...formData, rules: newRules });
   };
   //handle onchange for the flare
   const handleInputAddFlare = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     //new flare
     const newflare = formData.flare.map((flare, index) =>
-      index === newIndex ? { ...flare, value: event.target.value } : flare
+      index === newIndex ? { ...flare, value: event.target.value } : flare,
     );
 
     setFormData({ ...formData, flare: newflare });

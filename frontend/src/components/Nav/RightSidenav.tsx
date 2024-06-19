@@ -1,4 +1,4 @@
-import r_icon from "../../assets/r_icon.png";
+import r_icon from "@/assets/r_icon.png";
 
 function RightSidenav() {
   return (
@@ -18,8 +18,7 @@ function RightSidenav() {
             <p className="text-sm">34 upvotes •</p>
             <p className="text-sm">42 comments</p>
           </div>
-        <hr className="mt-2 border-gray-800 w-full" />
-
+          <hr className="mt-2 border-gray-800 w-full" />
         </div>
       </div>
     </div>

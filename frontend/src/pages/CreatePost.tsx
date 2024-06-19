@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import r_icon from "../assets/r_icon.png";
+import React, { useState, useRef, useEffect } from "react";
+import r_icon from "@/assets/r_icon.png";
 import { IoIosArrowDown } from "react-icons/io";
-import TagModal from "./modals/TagModal";
+import { IoSearchOutline } from "react-icons/io5";
+import TagModal from "@/components/modals/TagModal";
 interface Post {
   title: string;
   subRedditId: string;
@@ -16,11 +17,25 @@ function CreatePost() {
     subRedditId: "",
     flareId: "",
   });
+  const [isCommunityInputClick, setIsCommunityInputClick] =
+    useState<boolean>(false);
+  const inputRef = useRef(null);
+  // manage an event listener for clicks outside the input element (inputRef.current).
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (inputRef.current && !inputRef.current?.contains(event.target)) {
+        setIsCommunityInputClick(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   //modal
   const [showModal, setIsShowModal] = useState<boolean>(false);
 
   //handle form submit
-
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("form", formData);
@@ -35,7 +50,6 @@ function CreatePost() {
     }));
   };
   //get the data input by the user handleTextareaChange
-
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -58,25 +72,37 @@ function CreatePost() {
             <div className="py-4  ">
               <div className="relative   w-64 ">
                 <div className=" relative left-0 ">
-                  <img
-                    src={r_icon}
-                    alt=""
-                    className="w-5 h-5 absolute left-3 top-2.5 focus:hidden"
-                  />
+                  {isCommunityInputClick ? (
+                    <IoSearchOutline className="text-foreground w-5 h-5 absolute left-3 top-2.5  " />
+                  ) : (
+                    <img
+                      src={r_icon}
+                      alt=""
+                      className="w-5 h-5 absolute left-3 top-2.5 "
+                    />
+                  )}
                 </div>
                 <div>
                   <input
+                    ref={inputRef}
                     type="text"
-                    id="search"
-                    value={formData.flareId}
+                    id="subRedditId"
+                    onClick={() => setIsCommunityInputClick(true)}
+                    value={formData.subRedditId}
                     onChange={handleInputChange}
-                    name="search"
-                    className="rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-64  "
+                    name="subRedditId"
+                    className={
+                      !isCommunityInputClick
+                        ? "rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-64 "
+                        : "rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-72"
+                    }
                     placeholder="Select a community"
                   />
                 </div>
                 <div>
-                  <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
+                  {!isCommunityInputClick && (
+                    <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
+                  )}
                 </div>
               </div>
             </div>

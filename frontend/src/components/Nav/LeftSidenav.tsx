@@ -1,10 +1,10 @@
 import React from "react";
 import { IoMdAdd } from "react-icons/io";
-import barchart from "../../assets/barchart.svg";
+import barchart from "@/assets/barchart.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { CgArrowTopRightO } from "react-icons/cg";
- 
+
 function Sidenav() {
   return (
     <div className="  p-4 h-full text-foreground  border-r border-gray-800">

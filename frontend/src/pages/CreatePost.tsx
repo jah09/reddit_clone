@@ -3,6 +3,8 @@ import r_icon from "@/assets/r_icon.png";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import TagModal from "@/components/modals/TagModal";
+import CommunityModal from "@/components/modals/CommunityModal";
+
 interface Post {
   title: string;
   subRedditId: string;
@@ -20,20 +22,23 @@ function CreatePost() {
   const [isCommunityInputClick, setIsCommunityInputClick] =
     useState<boolean>(false);
   const inputRef = useRef(null);
+  //modal
+  const [showFlareModal, setIsShowFlareModal] = useState<boolean>(false);
+  const [showCommunityModal, setIsShowCommunityModal] =
+    useState<boolean>(false);
+
   // manage an event listener for clicks outside the input element (inputRef.current).
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (inputRef.current && !inputRef.current?.contains(event.target)) {
         setIsCommunityInputClick(false);
+        setIsShowCommunityModal(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  //modal
-  const [showModal, setIsShowModal] = useState<boolean>(false);
 
   //handle form submit
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -87,7 +92,10 @@ function CreatePost() {
                     ref={inputRef}
                     type="text"
                     id="subRedditId"
-                    onClick={() => setIsCommunityInputClick(true)}
+                    onClick={() => {
+                      setIsShowCommunityModal(true);
+                      setIsCommunityInputClick(true);
+                    }}
                     value={formData.subRedditId}
                     onChange={handleInputChange}
                     name="subRedditId"
@@ -104,6 +112,13 @@ function CreatePost() {
                     <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
                   )}
                 </div>
+              </div>
+              <div className=" bg-blue-900  ">
+                {showCommunityModal && (
+                  <CommunityModal
+                    onClose={() => setIsShowCommunityModal(false)}
+                  />
+                )}
               </div>
             </div>
             <div className="py-4">
@@ -138,7 +153,7 @@ function CreatePost() {
                     <button
                       type="button"
                       id="addTagBtn"
-                      onClick={() => setIsShowModal(true)}
+                      onClick={() => setIsShowFlareModal(true)}
                       className={
                         formData.subRedditId
                           ? "bg-[#2a3236] text-sm text-foreground py-[5px] px-3 rounded-full"
@@ -176,7 +191,9 @@ function CreatePost() {
           </form>
         </div>
       </div>
-      {showModal && <TagModal onClose={() => setIsShowModal(false)} />}
+      {showFlareModal && (
+        <TagModal onClose={() => setIsShowFlareModal(false)} />
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as signUpAPI from '../../services/user';
+import * as signUpAPI from "@/services/user";
 import { IoCloseOutline } from "react-icons/io5";
 import { GrPowerReset } from "react-icons/gr";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
@@ -41,7 +41,6 @@ function SignupModal() {
     } else {
       setIsPasswordShow(false);
       setType("password");
-
     }
   };
   //generate new display name

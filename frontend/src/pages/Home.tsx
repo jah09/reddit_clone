@@ -1,6 +1,6 @@
 import React from "react";
 import rewards from "@/assets/rewards.svg";
-import r_icon from "../assets/r_icon.png";
+import r_icon from "@/assets/r_icon.png";
 import { PiArrowFatDownLight, PiArrowFatUpLight } from "react-icons/pi";
 import { HiOutlineArrowUpTray } from "react-icons/hi2";
 import { FaRegCommentAlt } from "react-icons/fa";

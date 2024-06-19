@@ -7,7 +7,7 @@ import Popular from "./pages/Popular";
 
 import SignupModal from "./components/modals/SignupModal";
 import SubredditForm from "./components/modals/SubredditForm";
-import CreatePost from "./components/CreatePost";
+import CreatePost from "./pages/CreatePost";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

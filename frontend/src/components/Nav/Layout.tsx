@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "./Navbar";
-import LeftSidenav from "../Nav/LeftSidenav";
-import RightSidenav from "../Nav/RightSidenav";
-import { Outlet,useLocation } from "react-router-dom";
+import Navbar from "@/components/Nav/Navbar";
+import LeftSidenav from "@/components/Nav/LeftSidenav";
+import RightSidenav from "@/components/Nav/RightSidenav";
+import { Outlet, useLocation } from "react-router-dom";
 
 function Layout() {
-   const location = useLocation();
-  
+  const location = useLocation();
+
   return (
     <div>
       <Navbar />

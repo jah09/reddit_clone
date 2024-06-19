@@ -5,7 +5,11 @@ import profile from "@/assets/profile.jpg";
 import qrcode from "@/assets/qrcode.svg";
 import { GoKebabHorizontal } from "react-icons/go";
 import { MdOutlineAdsClick } from "react-icons/md";
-import { IoChatbubbleEllipsesOutline, IoSearchOutline ,IoBagOutline} from "react-icons/io5";
+import {
+  IoChatbubbleEllipsesOutline,
+  IoSearchOutline,
+  IoBagOutline,
+} from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import { LuBell } from "react-icons/lu";
 import { BsBoxArrowInRight } from "react-icons/bs";

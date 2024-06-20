@@ -18,16 +18,14 @@ module.exports = {
     },
     extend: {
       colors: {
-        backgroundColor: {
-          inherit: "inherit", // Allow inheriting background color
-        },
-
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
+        'background-primary': 'var(--background-primary)',
+        'background-secondary': 'var(--background-secondary)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'primary-accent': 'var(--primary-accent)',
+        'secondary-accent': 'var(--secondary-accent)',
+        'success': 'var(--success)',
+        'error': 'var(--error)',
       },
     },
   },

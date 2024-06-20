@@ -60,10 +60,10 @@ function LoginModal() {
           </div>
           <div className="mt-4 px-12 ">
             {" "}
-            <h1 className="text-2xl font-semibold leading-6 text-foreground">
+            <h1 className="text-2xl font-semibold leading-6 text-primary">
               Login
             </h1>
-            <p className="py-4 text-foreground">
+            <p className="py-4 text-primary">
               By continuing, you agree to our{" "}
               <span className="text-blue-600">User Agreement</span> and
               acknowledge that you understand the{" "}
@@ -79,7 +79,7 @@ function LoginModal() {
                   onChange={handleInputChange}
                   id="username"
                   placeholder="Username"
-                  className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
+                  className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
                 />
 
                 <div className="mt-3     relative">
@@ -90,7 +90,7 @@ function LoginModal() {
                     id="password"
                     placeholder="Password"
                     onChange={handleInputChange}
-                    className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
                   />{" "}
                   <span onClick={handleShowPassword}>
                     {isPasswordShow ? (
@@ -107,7 +107,7 @@ function LoginModal() {
                   </span>
                 </div>
                 <p className="text-blue-600  mt-6">Forgot password?</p>
-                <p className="text-foreground py-4">
+                <p className="text-primary py-4">
                   New to Reddit?
                   <Link to="/signup">
                     <span className="text-blue-600 cursor-pointer ml-2">
@@ -119,8 +119,8 @@ function LoginModal() {
                 <button
                   className={
                     !formData.username || !formData.password
-                      ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-foreground  tracking-wide font-medium cursor-no-drop"
-                      : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-foreground  tracking-wide font-medium"
+                      ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-primary  tracking-wide font-medium cursor-no-drop"
+                      : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-primary  tracking-wide font-medium"
                   }
                   disabled={!formData.username || !formData.password}
                 >

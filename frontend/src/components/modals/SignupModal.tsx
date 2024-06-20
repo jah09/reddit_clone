@@ -98,10 +98,10 @@ function SignupModal() {
           </div>
           <div className="mt-4 px-12 ">
             {" "}
-            <h1 className="text-2xl font-semibold leading-6 text-foreground">
+            <h1 className="text-2xl font-semibold leading-6 text-primary">
               Sign Up
             </h1>{" "}
-            <p className="py-4 text-foreground text-sm">
+            <p className="py-4 text-primary text-sm">
               By continuing, you agree to our{" "}
               <span className="text-blue-600">User Agreement</span> and
               acknowledge that you understand the{" "}
@@ -116,7 +116,7 @@ function SignupModal() {
                   id="username"
                   placeholder="Username"
                   onChange={handleInputChange}
-                  className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
+                  className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
                 />
                 <div className="mt-3     relative">
                   <input
@@ -126,7 +126,7 @@ function SignupModal() {
                     id="password"
                     placeholder="Password"
                     onChange={handleInputChange}
-                    className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
                   />{" "}
                   <span onClick={handleShowPassword}>
                     {isPasswordShow ? (
@@ -156,11 +156,11 @@ function SignupModal() {
                     id="displayname"
                     placeholder="Display Name"
                     onChange={handleInputChange}
-                    className="px-4 py-4 rounded-3xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0   bg-[#2a3236]"
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0   bg-[#2a3236]"
                   />
                 </div>
 
-                <p className="text-foreground mt-10">
+                <p className="text-primary mt-10">
                   Already an redditor?
                   <Link to="/login">
                     <span className="text-blue-600 cursor-pointer"> Login</span>
@@ -170,8 +170,8 @@ function SignupModal() {
                   <button
                     className={
                       !formData.username || !formData.password
-                        ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-foreground  tracking-wide font-medium cursor-no-drop flex items-center justify-center"
-                        : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-foreground  tracking-wide font-medium flex items-center justify-center"
+                        ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-primary  tracking-wide font-medium cursor-no-drop flex items-center justify-center"
+                        : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-primary  tracking-wide font-medium flex items-center justify-center"
                     }
                     disabled={!formData.username || !formData.password}
                   >

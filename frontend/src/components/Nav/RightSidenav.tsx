@@ -3,7 +3,7 @@ import r_icon from "@/assets/r_icon.png";
 function RightSidenav() {
   return (
     <div className="  p-2 h-full text-primary">
-      <div className="bg-black rounded-md p-3">
+      <div className="bg-background-secondary rounded-md p-3">
         <div className="flex">
           <p className="flex-1">RECENT POSTS</p>
           <button className="text-blue-500 ">Clear</button>
@@ -18,7 +18,7 @@ function RightSidenav() {
             <p className="text-sm">34 upvotes •</p>
             <p className="text-sm">42 comments</p>
           </div>
-          <hr className="mt-2 border-gray-800 w-full" />
+          <hr className="mt-2 border-neutral w-full" />
         </div>
       </div>
     </div>

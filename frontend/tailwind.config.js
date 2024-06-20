@@ -18,14 +18,18 @@ module.exports = {
     },
     extend: {
       colors: {
-        'background-primary': 'var(--background-primary)',
-        'background-secondary': 'var(--background-secondary)',
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        'primary-accent': 'var(--primary-accent)',
-        'secondary-accent': 'var(--secondary-accent)',
-        'success': 'var(--success)',
-        'error': 'var(--error)',
+        "background-primary": "var(--background-primary)",
+        "background-secondary": "var(--background-secondary)",
+        "text-primary": "var(--text-primary)",
+
+        "text-secondary": "var(--text-secondary)",
+        "primary-accent": "var(--primary-accent)",
+        "primary-accent-hover": "var(--primary-accent-hover)",
+
+        "secondary-accent": "var(--secondary-accent)",
+        success: "var(--success)",
+        error: "var(--error)",
+        neutral: "var(--neutral)",
       },
     },
   },

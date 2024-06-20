@@ -2,7 +2,7 @@ import r_icon from "@/assets/r_icon.png";
 
 function RightSidenav() {
   return (
-    <div className="  p-2 h-full text-foreground">
+    <div className="  p-2 h-full text-primary">
       <div className="bg-black rounded-md p-3">
         <div className="flex">
           <p className="flex-1">RECENT POSTS</p>

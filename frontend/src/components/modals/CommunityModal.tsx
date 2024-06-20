@@ -20,7 +20,7 @@ function CommunityModal() {
         isOpen={modalIsOpen}
       >
         <div className="  text-left bg-[#181c1f] h-80 rounded-lg overflow-y-auto align-bottom transition-all transform shadow-2xl py-6 px-2  mr-[27%]   w-80  top-[27%] absolute ">
-          <h1 className="text-foreground text-sm font-medium">Your profile</h1>
+          <h1 className="text-primary text-sm font-medium">Your profile</h1>
           <div>
             <div className="flex p-4 gap-x-2 items-center">
               <img
@@ -28,10 +28,10 @@ function CommunityModal() {
                 alt="mousecursor"
                 className="w-9 h-9   rounded-full"
               />
-              <p className="text-sm text-foreground">r/Scammaz</p>
+              <p className="text-sm text-primary">r/Scammaz</p>
             </div>
             <div className="mt-4  ">
-              <h1 className="text-foreground text-sm font-medium">
+              <h1 className="text-primary text-sm font-medium">
                 Your communities
               </h1>
               <div className="flex mt-2 px-4 gap-x-2 items-center">
@@ -41,7 +41,7 @@ function CommunityModal() {
                   className="w-9 h-9   rounded-full"
                 />
                 <div className="mt-1">
-                  <p className="text-sm text-foreground">r/Ediwow</p>
+                  <p className="text-sm text-primary">r/Ediwow</p>
                   <p className="text-xs text-gray-500">23 members</p>
                 </div>
               </div>
@@ -52,7 +52,7 @@ function CommunityModal() {
                   className="w-9 h-9   rounded-full"
                 />
                 <div className="mt-1">
-                  <p className="text-sm text-foreground">r/Ediwow</p>
+                  <p className="text-sm text-primary">r/Ediwow</p>
                   <p className="text-xs text-gray-500">23 members</p>
                 </div>
               </div>
@@ -63,7 +63,7 @@ function CommunityModal() {
                   className="w-9 h-9   rounded-full"
                 />
                 <div className="mt-1">
-                  <p className="text-sm text-foreground">r/Ediwow</p>
+                  <p className="text-sm text-primary">r/Ediwow</p>
                   <p className="text-xs text-gray-500">23 members</p>
                 </div>
               </div>
@@ -74,7 +74,7 @@ function CommunityModal() {
                   className="w-9 h-9   rounded-full"
                 />
                 <div className="mt-1">
-                  <p className="text-sm text-foreground">r/Ediwow</p>
+                  <p className="text-sm text-primary">r/Ediwow</p>
                   <p className="text-xs text-gray-500">23 members</p>
                 </div>
               </div>

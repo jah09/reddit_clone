@@ -64,22 +64,22 @@ function SubredditForm() {
   //handle onchange for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number,
+    newIndex: number
   ) => {
     //new rules
     const newRules = formData.rules.map((rule, index) =>
-      index === newIndex ? { ...rule, value: event.target.value } : rule,
+      index === newIndex ? { ...rule, value: event.target.value } : rule
     );
     setFormData({ ...formData, rules: newRules });
   };
   //handle onchange for the flare
   const handleInputAddFlare = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number,
+    newIndex: number
   ) => {
     //new flare
     const newflare = formData.flare.map((flare, index) =>
-      index === newIndex ? { ...flare, value: event.target.value } : flare,
+      index === newIndex ? { ...flare, value: event.target.value } : flare
     );
 
     setFormData({ ...formData, flare: newflare });
@@ -118,7 +118,7 @@ function SubredditForm() {
         <div className="inline-block text-left bg-[#181c1f] max-h-[90vh] rounded-xl  align-bottom transition-all transform shadow-2xl p-5 sm:align-middle w-3/5 mt-8  overflow-auto custom-y-scrollbar">
           <div className="flex ">
             <div className="flex flex-1 flex-col ">
-              <h1 className="text-foreground font-bold text-2xl">
+              <h1 className="text-primary font-bold text-2xl">
                 Tell us about your community
               </h1>
               <p className=" w-[80%] text-gray-400">
@@ -147,13 +147,13 @@ function SubredditForm() {
                       onChange={handleInputchange}
                       value={formData.name}
                       placeholder="Community name"
-                      className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
+                      className="px-4 py-4 rounded-2xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
                     />
                     <p className="flex justify-end mr-4 text-gray-400">0</p>
                   </div>
                   <div className="py-4">
                     <div className="flex justify-between ">
-                      <h5 className="text-foreground  font-medium">
+                      <h5 className="text-primary  font-medium">
                         Add rules to your community
                       </h5>
 
@@ -176,15 +176,13 @@ function SubredditForm() {
                           placeholder={`Rule ${index + 1}`}
                           value={rule.value}
                           onChange={(e) => handleInputChangeRule(e, index)}
-                          className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
+                          className="px-4 py-4 rounded-2xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
                         />
                       ))}
                     </div>
                     <div className="mt-4">
                       <div className="flex justify-between ">
-                        <h5 className="text-foreground  font-medium">
-                          Add flare
-                        </h5>
+                        <h5 className="text-primary  font-medium">Add flare</h5>
 
                         <button
                           onClick={handleAddFlare}
@@ -205,7 +203,7 @@ function SubredditForm() {
                             placeholder={`Flare ${key + 1}`}
                             value={flare.value}
                             onChange={(e) => handleInputAddFlare(e, key)}
-                            className="px-4 py-4 rounded-2xl w-full outline-none text-foreground focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
+                            className="px-4 py-4 rounded-2xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236] my-2"
                           />
                         ))}
                       </div>
@@ -214,7 +212,7 @@ function SubredditForm() {
                 </div>
                 <div className=" w-[40%]  ">
                   <div className="bg-[#181c1f] rounded-2xl p-3 shadow-md shadow-black">
-                    <p className="font-medium text-foreground text-xl">
+                    <p className="font-medium text-primary text-xl">
                       r/communityname
                     </p>{" "}
                     <p className="text-gray-400 text-sm">1 member . 1 online</p>
@@ -226,7 +224,7 @@ function SubredditForm() {
               <div></div>
               <div className=" ">
                 <button
-                  className="bg-[#2a3236] py-2 px-3 rounded-full font-medium text-foreground mr-2"
+                  className="bg-[#2a3236] py-2 px-3 rounded-full font-medium text-primary mr-2"
                   onClick={closeModal}
                 >
                   Cancel
@@ -239,8 +237,8 @@ function SubredditForm() {
                   className={
                     !formData.name ||
                     formData.rules.every((rule) => !rule.value)
-                      ? "bg-[#24282a] py-2 px-4 rounded-full font-medium text-foreground mr-2 cursor-no-drop"
-                      : "bg-blue-600 py-2 px-4 rounded-full font-medium text-foreground mr-2"
+                      ? "bg-[#24282a] py-2 px-4 rounded-full font-medium text-primary mr-2 cursor-no-drop"
+                      : "bg-blue-600 py-2 px-4 rounded-full font-medium text-primary mr-2"
                   }
                 >
                   Submit

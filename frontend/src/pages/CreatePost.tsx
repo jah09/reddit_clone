@@ -91,7 +91,7 @@ function CreatePost() {
               <div className="relative   w-64 ">
                 <div className=" relative left-0 ">
                   {isCommunityInputClick ? (
-                    <IoSearchOutline className="text-foreground w-5 h-5 absolute left-3 top-2.5  " />
+                    <IoSearchOutline className="text-primary w-5 h-5 absolute left-3 top-2.5  " />
                   ) : (
                     <img
                       src={r_icon}
@@ -127,11 +127,11 @@ function CreatePost() {
             <div className="py-4">
               <div className="   ">
                 <ul className="flex gap-x-6">
-                  <li className="text-foreground border-b-[3px] border-blue-500 ">
+                  <li className="text-primary border-b-[3px] border-blue-500 ">
                     Text
                   </li>
-                  <li className="text-foreground">Images & Video</li>
-                  <li className="text-foreground">Link</li>
+                  <li className="text-primary">Images & Video</li>
+                  <li className="text-primary">Link</li>
                 </ul>
                 <div className="py-6 w-[90%]  ">
                   <input
@@ -142,12 +142,12 @@ function CreatePost() {
                     id="title"
                     value={formData.title}
                     placeholder="Title"
-                    className="px-4 py-4 rounded-2xl outline-none text-foreground   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
+                    className="px-4 py-4 rounded-2xl outline-none text-primary   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                   />
 
                   <div className="mt-1 flex justify-end ">
                     {/* <p className="ml-4  ">Error here</p> */}
-                    <p className="text-foreground mr-2 ">0/300</p>
+                    <p className="text-primary mr-2 ">0/300</p>
                   </div>
                 </div>
                 <div className="mt-2">
@@ -159,12 +159,12 @@ function CreatePost() {
                       onClick={() => setIsShowFlareModal(true)}
                       className={
                         formData.subRedditId
-                          ? "bg-[#2a3236] text-sm text-foreground py-[5px] px-3 rounded-full"
-                          : "bg-[#1a1d1f] text-sm text-foreground py-[5px] px-3 rounded-full"
+                          ? "bg-[#2a3236] text-sm text-primary py-[5px] px-3 rounded-full"
+                          : "bg-[#1a1d1f] text-sm text-primary py-[5px] px-3 rounded-full"
                       }
                       disabled={!formData.subRedditId}
                     >
-                      Add tags
+                      Add flare
                     </button>
                   </div>
                   <div className="w-[90%] mt-4">
@@ -174,14 +174,14 @@ function CreatePost() {
                       value={formData.body}
                       onChange={handleTextareaChange}
                       placeholder="Body"
-                      className="px-4 py-4 rounded-2xl outline-none text-foreground   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
+                      className="px-4 py-4 rounded-2xl outline-none text-primary   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                     ></textarea>
                     <div className="flex justify-end gap-x-2 mt-2">
-                      <button className="bg-[#24282a] py-2 px-3 rounded-full text-foreground font-medium">
+                      <button className="bg-[#24282a] py-2 px-3 rounded-full text-primary font-medium">
                         Save draft
                       </button>
                       <button
-                        className="bg-[#24282a] py-2 px-4 rounded-full text-foreground font-medium"
+                        className="bg-[#24282a] py-2 px-4 rounded-full text-primary font-medium"
                         type="submit"
                       >
                         Post

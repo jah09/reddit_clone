@@ -7,7 +7,7 @@ import { CgArrowTopRightO } from "react-icons/cg";
 
 function Sidenav() {
   return (
-    <div className="  p-4 h-full text-foreground  border-r border-gray-800">
+    <div className="  p-4 h-full text-primary  border-r border-gray-800">
       <div className=" ">
         <ul>
           <NavLink to="/">
@@ -33,7 +33,7 @@ function Sidenav() {
                     : "py-2 px-4 hover:bg-[#181c1f] hover:rounded-lg cursor-pointer flex items-center  mt-0.5"
                 }
               >
-                <CgArrowTopRightO className="w-6 h-6 text-foreground" />
+                <CgArrowTopRightO className="w-6 h-6 text-primary" />
                 <span className="ml-3">Popular</span>
               </li>
             )}

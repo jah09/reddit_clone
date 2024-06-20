@@ -25,11 +25,11 @@ function Navbar() {
   return (
     <nav className="w-full py-1.5 px-3 bg-background border-b border-gray-800   ">
       <div className="flex justify-between">
-        <div className="text-3xl font-bold  text-foreground  flex  items-center gap-x-2 justify-start ">
+        <div className="text-3xl font-bold  text-primary  flex  items-center gap-x-2 justify-start ">
           <Link to="/" className="inline-flex">
             {" "}
             <img src={reddit} alt="logo" className="w-8 h-8" />
-            <h1 className="tracking wide text-md ml-2">reddit </h1>
+            <h1 className="tracking wide text-md ml-2">Foraverse </h1>
           </Link>
         </div>
         <div className="justify-center flex  relative items-center  ml-10">
@@ -37,9 +37,9 @@ function Navbar() {
             <IoSearchOutline className="w-6 h-6 text-white" />
           </div>
           <input
-            className="rounded-full px-11 text-foreground focus:outline-none min-w-[500px]  bg-[#2a3236] py-2"
+            className="rounded-full px-11 text-primary focus:outline-none min-w-[500px]  bg-[#2a3236] py-2"
             type="text"
-            placeholder="Search Reddit"
+            placeholder="Search foraverse"
           />
         </div>
 
@@ -53,13 +53,13 @@ function Navbar() {
                 <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-white" />
               </div>
               <Link to="/create-post">
-                <button className="text-foreground  flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer py-1 px-2.5">
+                <button className="text-primary  flex items-center hover:hover:bg-[#181c1f]  hover:rounded-full  cursor-pointer py-1 px-2.5">
                   <IoMdAdd className="w-7 h-7 " />
                   <span>Create</span>
                 </button>
               </Link>
               <div className="">
-                <LuBell className="w-[25px] h-[25px] text-foreground" />
+                <LuBell className="w-[25px] h-[25px] text-primary" />
               </div>
               <div className=" ">
                 <img
@@ -73,14 +73,14 @@ function Navbar() {
         ) : (
           <div className="  w-96 px-2 ">
             <div className="flex gap-x-3 justify-end items-center    ">
-              <button className="text-foreground rounded-full bg-[#2a3236] px-3 py-[6px] h-10 flex gap-x-2 items-center">
+              <button className="text-primary rounded-full bg-[#2a3236] px-3 py-[6px] h-10 flex gap-x-2 items-center">
                 <span className="inline-block">
                   <img src={qrcode} alt="" className="w-6 h-6" />
                 </span>
                 Get app
               </button>
               <Link to="/login">
-                <button className="text-foreground rounded-full bg-primary px-3 py-[6px] h-10">
+                <button className="text-primary rounded-full bg-primary px-3 py-[6px] h-10">
                   Log In
                 </button>
               </Link>

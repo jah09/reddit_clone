@@ -21,7 +21,7 @@ function CreatePost() {
   });
   const [isCommunityInputClick, setIsCommunityInputClick] =
     useState<boolean>(false);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   //modal
   const [showFlareModal, setIsShowFlareModal] = useState<boolean>(false);
   const [showCommunityModal, setIsShowCommunityModal] =
@@ -30,15 +30,28 @@ function CreatePost() {
   // manage an event listener for clicks outside the input element (inputRef.current).
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (inputRef.current && !inputRef.current?.contains(event.target)) {
+      if (
+        inputRef.current &&
+        !inputRef.current?.contains(event.target as Node)
+      ) {
         setIsCommunityInputClick(false);
         setIsShowCommunityModal(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  //handle onclick of input (select a community)
+  const handleInputClick = () => {
+    setIsCommunityInputClick(true);
+    setIsShowCommunityModal(true);
+
+    //after the modal will open, it will back to refocus in the input
+    setTimeout(() => {
+      inputRef.current?.focus(); // Refocus the input after a short delay
+    }, 100);
+  };
 
   //handle form submit
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -92,10 +105,7 @@ function CreatePost() {
                     ref={inputRef}
                     type="text"
                     id="subRedditId"
-                    onClick={() => {
-                      setIsShowCommunityModal(true);
-                      setIsCommunityInputClick(true);
-                    }}
+                    onClick={handleInputClick}
                     value={formData.subRedditId}
                     onChange={handleInputChange}
                     name="subRedditId"
@@ -112,13 +122,6 @@ function CreatePost() {
                     <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
                   )}
                 </div>
-              </div>
-              <div className=" bg-blue-900  ">
-                {showCommunityModal && (
-                  <CommunityModal
-                    onClose={() => setIsShowCommunityModal(false)}
-                  />
-                )}
               </div>
             </div>
             <div className="py-4">
@@ -194,6 +197,9 @@ function CreatePost() {
       {showFlareModal && (
         <TagModal onClose={() => setIsShowFlareModal(false)} />
       )}
+      <div className=" bg-blue-900  ">
+        {showCommunityModal && <CommunityModal />}
+      </div>
     </div>
   );
 }

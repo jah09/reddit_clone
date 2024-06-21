@@ -4,7 +4,7 @@ function Home() {
   return (
     <div className="text-primary p-4">
       <div className="">
-        <hr className="  border-gray-800 " />
+        <hr className="border-neutral" />
         <PostItem />
         <PostItem />
         <PostItem />

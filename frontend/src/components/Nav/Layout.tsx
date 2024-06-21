@@ -10,7 +10,7 @@ function Layout() {
   return (
     <div>
       <Navbar />
-      <div className=" bg-background flex min-h-screen">
+      <div className="   flex min-h-screen">
         <div className="w-[20%] ">
           <LeftSidenav />
         </div>

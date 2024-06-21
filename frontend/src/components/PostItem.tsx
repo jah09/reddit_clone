@@ -46,7 +46,7 @@ function PostItem() {
           </button>
         </div>
       </div>
-      <hr className="  border-gray-800 mt-1" />
+      <hr className="  border-neutral mt-1" />
     </div>
   );
 }

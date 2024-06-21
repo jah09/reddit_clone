@@ -20,6 +20,8 @@ module.exports = {
       colors: {
         "background-primary": "var(--background-primary)",
         "background-secondary": "var(--background-secondary)",
+        "background-secondary-hover": "var(--background-secondary-hover)",
+
         "text-primary": "var(--text-primary)",
 
         "text-secondary": "var(--text-secondary)",

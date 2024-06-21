@@ -86,63 +86,73 @@ function SignupModal() {
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "
         isOpen={modalIsOpen}
       >
-        <div className="inline-block text-left bg-[#181c1f] min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-7">
-          <div className="flex  ">
-            <div className="flex flex-1  "></div>
+        <div className="inline-block text-left bg-background-secondary min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-7">
+          <div className="flex  bg-inherit">
+            <div className="flex flex-1 bg-inherit "></div>
             <div
-              className="flex  items-center bg-[#2a3236] w-8 h-8 rounded-full "
+              className="flex  items-center bg-background-secondary w-8 h-8 rounded-full "
               onClick={closeModal}
             >
-              <IoCloseOutline className=" w-8 h-8  cursor-pointer text-white" />
+              <IoCloseOutline className=" w-8 h-8  cursor-pointer text-neutral rounded-full bg-background-secondary-hover" />
             </div>
           </div>
-          <div className="mt-4 px-12 ">
-            {" "}
-            <h1 className="text-2xl font-semibold leading-6 text-primary">
+          <div className="mt-4 px-12 bg-inherit">
+            <h1 className="text-2xl font-semibold leading-6 text-text-primary bg-inherit">
               Sign Up
-            </h1>{" "}
-            <p className="py-4 text-primary text-sm">
+            </h1>
+            <p className="py-4 text-text-primary text-sm bg-inherit">
               By continuing, you agree to our{" "}
-              <span className="text-blue-600">User Agreement</span> and
-              acknowledge that you understand the{" "}
-              <span className="text-blue-600">Privacy Policy</span>.
+              <span className="text-secondary-accent bg-inherit">
+                User Agreement
+              </span>{" "}
+              and acknowledge that you understand the{" "}
+              <span className="text-secondary-accent bg-inherit">
+                Privacy Policy
+              </span>
+              .
             </p>
-            <div className="mt-8">
-              <form action=" " onSubmit={handleFormSubmit}>
+            <div className="mt-8 bg-inherit">
+              <form
+                action=" "
+                onSubmit={handleFormSubmit}
+                className="bg-inherit"
+              >
                 <input
                   value={formData.username}
                   type="text"
+                  required
                   name="username"
                   id="username"
                   placeholder="Username"
                   onChange={handleInputChange}
-                  className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-[#2a3236]"
+                  className="px-4 py-4 rounded-3xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary"
                 />
-                <div className="mt-3     relative">
+                <div className="mt-3  bg-inherit  relative">
                   <input
                     value={formData.password}
                     type={type}
                     name="password"
                     id="password"
+                    required
                     placeholder="Password"
                     onChange={handleInputChange}
-                    className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-[#2a3236]"
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-background-primary"
                   />{" "}
                   <span onClick={handleShowPassword}>
                     {isPasswordShow ? (
                       <IoMdEye
                         className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
-                        color="#70757a"
+                        color="#6B7280"
                       />
                     ) : (
                       <IoMdEyeOff
                         className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
-                        color="#70757a"
+                        color="#6B7280"
                       />
                     )}
                   </span>
                 </div>
-                <div className="relative mt-3">
+                <div className="relative mt-3  bg-inherit">
                   <button onClick={generateNewDisplayName} type="submit">
                     <GrPowerReset
                       className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
@@ -150,30 +160,30 @@ function SignupModal() {
                     />
                   </button>
                   <input
+                    required
                     value={formData.displayname}
-                    type="texte"
+                    type="text"
                     name="displayname"
                     id="displayname"
                     placeholder="Display Name"
                     onChange={handleInputChange}
-                    className="px-4 py-4 rounded-3xl w-full outline-none text-primary focus-visible:ring-offset-0 focus-visible:ring-0   bg-[#2a3236]"
+                    className="px-4 py-4 rounded-3xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-background-primary"
                   />
                 </div>
 
-                <p className="text-primary mt-10">
-                  Already an redditor?
-                  <Link to="/login">
-                    <span className="text-blue-600 cursor-pointer"> Login</span>
+                <p className="text-primary mt-10  bg-inherit text-text-secondary">
+                  Already have an account?
+                  <Link to="/login" className=" bg-inherit">
+                    <span className="text-secondary-accent cursor-pointer  bg-inherit">
+                      {" "}
+                      Login
+                    </span>
                   </Link>
                 </p>
-                <div className=" ">
-                  <button
-                    className={
-                      !formData.username || !formData.password
-                        ? "p-4 rounded-3xl w-full outline-none mt-10  bg-[#24282a]  text-primary  tracking-wide font-medium cursor-no-drop flex items-center justify-center"
-                        : "p-4 rounded-3xl w-full outline-none mt-10 bg-[#d93900] cursor-pointer text-primary  tracking-wide font-medium flex items-center justify-center"
-                    }
-                    disabled={!formData.username || !formData.password}
+                <div className=" bg-inherit ">
+                  <button type="submit"
+                    className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
+                   
                   >
                     {" "}
                     {isLoading && (

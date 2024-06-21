@@ -51,15 +51,18 @@
     --ring: 20.5 90.2% 48.2%;
     --radius: 4px; */
  
-    /*#111827  #152030*/
+    /*#111827  #152030 */
     --background-primary: #1f2937;
     --background-secondary: #273444;     /*for cards, comments or #2D3748 */
-  
+    --background-secondary-hover: #374151 ;  /* #273444 374151*/
     --text-primary: #e2e8f0;   /*or text color - #E2E8F0  #F8F9FA*/
     --text-secondary: #718096; /*for timestamps, metadata, etc. */
-    --primary-accent: #06b6d4; /*It works well for buttons, links, and other interactive elements.or CTA-- hover: #0891B2 or #2DD4BF*/
+
+    --primary-accent: #0891B2; /*It works well for buttons, links, and other interactive elements.or CTA-- hover: #0891B2 or #2DD4BF 06b6d4*/
     --primary-accent-hover: #0891B2;
+
     --secondary-accent: #f59e0b; /*highlight specific areas or calls to action.*/
+     
     --success: #22c55e; /* positive feedback, like upvotes */
     --error: #ef4444; /*errors or warnings.*/
     --neutral: #6B7280  ;  /* can be used for dividers, icons, and other UI elements.#4A5568  */

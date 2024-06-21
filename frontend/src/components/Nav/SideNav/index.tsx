@@ -1,11 +1,13 @@
-import React from "react";
 import { IoMdAdd } from "react-icons/io";
 import barchart from "@/assets/barchart.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { CgArrowTopRightO } from "react-icons/cg";
-
-function Sidenav() {
+import CommunityItems from "@/components/CommunityItems";
+import communityData from "@/data/community";
+function LeftSidenav() {
+  const community = communityData();
+  console.log("type", community);
   return (
     <div className="  p-4 h-full text-primary  border-r border-neutral">
       <div className=" ">
@@ -56,9 +58,8 @@ function Sidenav() {
           <p>CUSTOM FEEDS</p>
         </div>
         <hr className="border-neutral mt-12" />
-        <div className="mt-6    ">
+        <div className="mt-6 ">
           <div className="p-2 hover:bg-[#152030]  hover:rounded-lg ">
-            {" "}
             <p className="bg-inherit text-text-primary">COMMUNITIES</p>
           </div>
 
@@ -70,10 +71,15 @@ function Sidenav() {
               </button>
             </Link>
           </div>
+
+          <div className="mt-2">
+            {community.map((item) => (
+              <CommunityItems community={item} key={item.id}/>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default Sidenav;
+export default LeftSidenav;

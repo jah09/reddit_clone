@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import reddit from "@/assets/reddit.svg";
-import appLogo from "@/assets/Foraverse_logo_transparent.png";
+import appLogo from "@/assets/test2.png";
 
 import profile from "@/assets/profile.jpg";
 import qrcode from "@/assets/qrcode.svg";
@@ -25,12 +25,18 @@ function Navbar() {
     setIsKebabClicked(!isKebabClicked);
   };
   return (
-    <nav className="w-full py-1.5 px-3 bg-background border-b border-neutral text-text-primary  ">
+    <nav className="w-full py-1.5 px-3 border-b border-neutral text-text-primary  ">
       <div className="flex justify-between">
         <div className="text-3xl font-bold  text-primary  flex  items-center gap-x-2 justify-start ">
           <Link to="/" className="inline-flex">
             {" "}
-            <img src={reddit} alt="logo" className="w-8 h-8" />
+            <div className="w-8 h-8 relative overflow-hidden bg-red-900">
+              <img
+                src={reddit}
+                alt="logo"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover w-full h-full"
+              />
+            </div>
             <h1 className="tracking wide text-md ml-2 text-text-primary">
               Foraverse{" "}
             </h1>
@@ -49,27 +55,27 @@ function Navbar() {
 
         {isLogin ? (
           <div className="  w-96 px-2">
-            <div className="flex  gap-x-2 items-center  justify-end  ">
-              <div className=" ">
-                <MdOutlineAdsClick className="w-[25px] h-[25px] text-neutral " />
+            <div className="flex  gap-x-[2px] items-center  justify-end  ">
+              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+                <MdOutlineAdsClick className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
               </div>
-              <div>
-                <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-neutral  " />
+              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+                <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-neutral   hover:rounded-full" />
               </div>
               <Link to="/create-post">
-                <button className="text-text-primary  flex items-center hover:hover:bg-primary-accent-hover  hover:rounded-full  cursor-pointer py-1 px-2.5 group">
-                  <IoMdAdd className="w-7 h-7 text-neutral bg-transparent group-hover:text-primary-accent" />
+                <button className="text-text-primary  flex items-center hover:bg-[#152030] hover:rounded-full  cursor-pointer py-1 px-2.5  *:">
+                  <IoMdAdd className="w-7 h-7 text-neutral bg-transparent  " />
                   <span className="bg-transparent">Create</span>
                 </button>
               </Link>
-              <div className="">
-                <LuBell className="w-[25px] h-[25px] text-neutral" />
+              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+                <LuBell className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
               </div>
               <div className=" ">
                 <img
                   src={profile}
                   alt="mousecursor"
-                  className="w-7 h-7 rounded-full"
+                  className="w-7 h-7 rounded-full ml-[2px]"
                 />
               </div>
             </div>

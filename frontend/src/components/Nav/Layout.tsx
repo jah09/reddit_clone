@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "@/components/Nav/Navbar";
-import LeftSidenav from "@/components/Nav/LeftSidenav";
-import RightSidenav from "@/components/Nav/RightSidenav";
+import Navbar from '@/components/Nav/Navbar/index'
+import LeftSidenav from "@/components/Nav/SideNav/index";
+import RecentPost from "@/components/RecentPost";
 import { Outlet, useLocation } from "react-router-dom";
 
 function Layout() {
@@ -18,7 +18,7 @@ function Layout() {
           <Outlet />
         </div>
         <div className="w-[25%]">
-          {location.pathname !== "/create-post" && <RightSidenav />}
+          {location.pathname !== "/create-post" && <RecentPost />}
         </div>
       </div>
     </div>

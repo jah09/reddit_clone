@@ -81,17 +81,17 @@ function CreatePost() {
       <div className="py-6 px-10">
         <div>
           <div className="flex justify-between">
-            <h1 className="font-bold text-[#b7cad4] text-xl tracking-normal">
+            <h1 className="font-bold text-text-primary text-xl tracking-normal">
               Create post
             </h1>
-            <h5 className="text-[#b7cad4] font-medium mr-[70px]">Drafts</h5>
+            <h5 className="text-text-primary font-medium mr-[70px]">Drafts</h5>
           </div>
           <form action="" onSubmit={handleFormSubmit} className=" ">
             <div className="py-4  ">
               <div className="relative   w-64 ">
                 <div className=" relative left-0 ">
                   {isCommunityInputClick ? (
-                    <IoSearchOutline className="text-primary w-5 h-5 absolute left-3 top-2.5  " />
+                    <IoSearchOutline className="text-neutral w-5 h-5 absolute left-3 top-2.5 bg-transparent " />
                   ) : (
                     <img
                       src={r_icon}
@@ -111,15 +111,15 @@ function CreatePost() {
                     name="subRedditId"
                     className={
                       !isCommunityInputClick
-                        ? "rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-64 "
-                        : "rounded-full py-2 px-10 outline-none bg-[#2a3236] text-gray-100 placeholder-slate-50   w-72"
+                        ? "rounded-full py-2 px-10 outline-none bg-background-secondary text-text-primary placeholder-text-primary  w-64 "
+                        : "rounded-full py-2 px-10 outline-none bg-background-secondary text-text-primary placeholdertext-primary   w-72"
                     }
                     placeholder="Select a community"
                   />
                 </div>
                 <div>
                   {!isCommunityInputClick && (
-                    <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-white" />
+                    <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-neutral bg-transparent" />
                   )}
                 </div>
               </div>
@@ -127,11 +127,11 @@ function CreatePost() {
             <div className="py-4">
               <div className="   ">
                 <ul className="flex gap-x-6">
-                  <li className="text-primary border-b-[3px] border-blue-500 ">
+                  <li className="text-text-primary border-b-[3px] border-secondary-accent ">
                     Text
                   </li>
-                  <li className="text-primary">Images & Video</li>
-                  <li className="text-primary">Link</li>
+                  <li className="text-text-primary">Images & Video</li>
+                  <li className="text-text-primary">Link</li>
                 </ul>
                 <div className="py-6 w-[90%]  ">
                   <input
@@ -140,27 +140,26 @@ function CreatePost() {
                     autoComplete="off"
                     name="title"
                     id="title"
+                    required
                     value={formData.title}
                     placeholder="Title"
-                    className="px-4 py-4 rounded-2xl outline-none text-primary   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
+                    className="px-4 py-4 rounded-2xl outline-none text-text-primary   focus-visible:ring-0 bg-background   w-full  border border-background-secondary placeholder-text-primary"
                   />
 
                   <div className="mt-1 flex justify-end ">
-                    {/* <p className="ml-4  ">Error here</p> */}
-                    <p className="text-primary mr-2 ">0/300</p>
+                    <p className="text-text-primary mr-2 ">0/300</p>
                   </div>
                 </div>
                 <div className="mt-2">
                   <div className=" ">
-                    {/* #1a1d1f  #24282a #2a3236*/}
                     <button
                       type="button"
                       id="addTagBtn"
                       onClick={() => setIsShowFlareModal(true)}
                       className={
                         formData.subRedditId
-                          ? "bg-[#2a3236] text-sm text-primary py-[5px] px-3 rounded-full"
-                          : "bg-[#1a1d1f] text-sm text-primary py-[5px] px-3 rounded-full"
+                          ? "bg-secondary-accent text-sm text-black py-[5px] px-3 rounded-full"
+                          : "bg-neutral text-sm text-black py-[5px] px-3 rounded-full"
                       }
                       disabled={!formData.subRedditId}
                     >
@@ -171,17 +170,18 @@ function CreatePost() {
                     <textarea
                       name="body"
                       id="body"
+                      required
                       value={formData.body}
                       onChange={handleTextareaChange}
                       placeholder="Body"
-                      className="px-4 py-4 rounded-2xl outline-none text-primary   focus-visible:ring-0 bg-background   w-full  border border-gray-500"
+                      className="px-4 py-4 rounded-2xl outline-none text-text-primary   placeholder-text-primary focus-visible:ring-0 bg-background   w-full  border border-gray-500"
                     ></textarea>
                     <div className="flex justify-end gap-x-2 mt-2">
-                      <button className="bg-[#24282a] py-2 px-3 rounded-full text-primary font-medium">
+                      <button className="bg-neutral py-2 px-3 rounded-full text-text-primary font-medium">
                         Save draft
                       </button>
                       <button
-                        className="bg-[#24282a] py-2 px-4 rounded-full text-primary font-medium"
+                        className="bg-primary-accent py-2 px-4 rounded-full text-text-primary font-medium"
                         type="submit"
                       >
                         Post

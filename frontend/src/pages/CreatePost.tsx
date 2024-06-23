@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import TagModal from "@/components/modals/TagModal";
 import CommunityModal from "@/components/modals/CommunityModal";
-
+import Select from "react-select";
 interface Post {
   title: string;
   subRedditId: string;
@@ -35,7 +35,7 @@ function CreatePost() {
         !inputRef.current?.contains(event.target as Node)
       ) {
         setIsCommunityInputClick(false);
-        setIsShowCommunityModal(false);
+      setIsShowCommunityModal(false)
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -51,6 +51,9 @@ function CreatePost() {
     setTimeout(() => {
       inputRef.current?.focus(); // Refocus the input after a short delay
     }, 100);
+  };
+  const handleModalClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent modal click from propagating and closing the modal
   };
 
   //handle form submit
@@ -75,7 +78,11 @@ function CreatePost() {
       [name]: value,
     }));
   };
-
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
   return (
     <div className=" ">
       <div className="py-6 px-10">
@@ -101,7 +108,8 @@ function CreatePost() {
                   )}
                 </div>
                 <div>
-                  <input
+                  <Select options={options}   />
+                  {/* <input
                     ref={inputRef}
                     type="text"
                     id="subRedditId"
@@ -115,13 +123,13 @@ function CreatePost() {
                         : "rounded-full py-2 px-10 outline-none bg-background-secondary text-text-primary placeholdertext-primary   w-72"
                     }
                     placeholder="Select a community"
-                  />
+                  /> */}
                 </div>
-                <div>
+                {/* <div>
                   {!isCommunityInputClick && (
                     <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-neutral bg-transparent" />
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="py-4">
@@ -197,9 +205,19 @@ function CreatePost() {
       {showFlareModal && (
         <TagModal onClose={() => setIsShowFlareModal(false)} />
       )}
-      <div className=" bg-blue-900  ">
-        {showCommunityModal && <CommunityModal />}
-      </div>
+      {/* <div className=" bg-blue-900  " onClick={handleModalClick}>
+        {showCommunityModal && (
+          <CommunityModal onClose={() => setIsShowCommunityModal(false)} />
+        )}
+      </div> */}
+       
+      {/* {showCommunityModal && (
+        <div className="bg-blue-900" onClick={handleModalClick}>
+                    
+          <CommunityModal onClose={() => setIsShowCommunityModal(false)} />
+                  
+        </div>
+      )} */}
     </div>
   );
 }

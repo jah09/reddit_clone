@@ -45,7 +45,7 @@ function LoginModal() {
   };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
-     <Modal
+      <Modal
         appElement={document.getElementById("root")}
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "
         isOpen={modalIsOpen}
@@ -62,10 +62,10 @@ function LoginModal() {
           </div>
           <div className="mt-4 px-12 bg-inherit">
             <h1 className="text-2xl font-semibold leading-6 text-text-primary bg-inherit">
-            Login
+              Login
             </h1>
             <p className="py-4 text-text-primary text-sm bg-inherit">
-            By continuing, you agree to our{" "}
+              By continuing, you agree to our{" "}
               <span className="text-secondary-accent bg-inherit">
                 User Agreement
               </span>{" "}
@@ -76,11 +76,7 @@ function LoginModal() {
               .
             </p>
             <div className="mt-8 bg-inherit">
-              <form
-                action=" "
-              
-                className="bg-inherit"
-              >
+              <form action=" " className="bg-inherit">
                 <input
                   value={formData.username}
                   type="text"
@@ -105,31 +101,30 @@ function LoginModal() {
                   <span onClick={handleShowPassword}>
                     {isPasswordShow ? (
                       <IoMdEye
-                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
+                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3 bg-transparent"
                         color="#6B7280"
                       />
                     ) : (
                       <IoMdEyeOff
-                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3"
+                        className="w-6 h-6 mr-2 mx-1 cursor-pointer absolute right-1 top-3 bg-transparent"
                         color="#6B7280"
                       />
                     )}
                   </span>
                 </div>
-               
 
                 <p className="text-primary mt-10  bg-inherit text-text-secondary">
-                New to Foraverse?
+                  New to Foraverse?
                   <Link to="/signup" className=" bg-inherit">
-                    <span className="text-secondary-accent cursor-pointer  bg-inherit">
+                    <span className="text-secondary-accent cursor-pointer  bg-inherit ml-1">
                       Sign up
                     </span>
                   </Link>
                 </p>
                 <div className=" bg-inherit ">
-                  <button type="submit"
+                  <button
+                    type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
-                   
                   >
                     {isLoading && (
                       <svg
@@ -149,7 +144,7 @@ function LoginModal() {
                         />
                       </svg>
                     )}
-                     Log in
+                    Log in
                   </button>
                 </div>
               </form>

@@ -1,14 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import profile from "@/assets/profile.jpg";
 
 import Modal from "react-modal";
-
-function CommunityModal() {
+interface CommunityModal {
+  onClose: () => void;
+}
+function CommunityModal({ onClose }: CommunityModal) {
   //modals
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
 
+  const [selectedCommunity, setSelectedCommunity] = useState("");
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [onClose]);
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCommunity(event.target.value);
+    onClose();
+    // Optionally, communicate the selected value to the parent component
+    // using a callback prop or some other mechanism
+  };
   return (
-    <div className="">
+    <div className="" ref={modalRef}>
       <Modal
         style={{
           overlay: {
@@ -16,11 +41,16 @@ function CommunityModal() {
           },
         }}
         appElement={document.getElementById("root")}
-        className="flex items-center text-center min-h-screen justify-around   bg-transparent  "
+        className="flex items-center text-center min-h-screen justify-around   bg-transparent modal-content "
         isOpen={modalIsOpen}
       >
-        <div className="  text-left  bg-background-secondary h-80 rounded-lg overflow-y-auto align-bottom transition-all transform shadow-2xl py-6 px-2  mr-[27%]   w-80  top-[27%] absolute ">
-          <h1 className="text-text-primary text-sm font-medium bg-inherit">Your profile</h1>
+        <div
+          className="  text-left  bg-background-secondary h-80 rounded-lg overflow-y-auto align-bottom transition-all transform shadow-2xl py-6 px-2  mr-[27%]   w-80  top-[27%] absolute modal-content "
+          ref={modalRef}
+        >
+          <h1 className="text-text-primary text-sm font-medium bg-inherit">
+            Your profile
+          </h1>
           <div className="bg-inherit">
             <div className="flex p-4 gap-x-2 items-center bg-inherit">
               <img
@@ -34,50 +64,18 @@ function CommunityModal() {
               <h1 className="text-text-primary text-sm font-medium bg-inherit">
                 Your communities
               </h1>
-              <div className="flex mt-2 px-4 gap-x-2 items-center bg-inherit">
-                <img
-                  src={profile}
-                  alt="mousecursor"
-                  className="w-9 h-9   rounded-full"
-                />
-                <div className="mt-1 bg-inherit">
-                  <p className="text-sm text-text-primary bg-inherit">r/Ediwow</p>
-                  <p className="text-xs text-text-secondary bg-inherit">23 members</p>
-                </div>
-              </div>
-              <div className="flex mt-2 px-4 gap-x-2 items-center bg-inherit">
-                <img
-                  src={profile}
-                  alt="mousecursor"
-                  className="w-9 h-9   rounded-full"
-                />
-                <div className="mt-1 bg-inherit">
-                <p className="text-sm text-text-primary bg-inherit">r/Ediwow</p>
-                <p className="text-xs text-text-secondary bg-inherit">23 members</p>
-                </div>
-              </div>
-              <div className="flex mt-2 px-4 gap-x-2 items-center bg-inherit">
-                <img
-                  src={profile}
-                  alt="mousecursor"
-                  className="w-9 h-9   rounded-full"
-                />
-                <div className="mt-1 bg-inherit">
-                <p className="text-sm text-text-primary bg-inherit">r/Ediwow</p>
-                <p className="text-xs text-text-secondary bg-inherit">23 members</p>
-                </div>
-              </div>
-              <div className="flex mt-2 px-4 gap-x-2 items-center bg-inherit">
-                <img
-                  src={profile}
-                  alt="mousecursor"
-                  className="w-9 h-9   rounded-full"
-                />
-                <div className="mt-1 bg-inherit">
-                <p className="text-sm text-text-primary bg-inherit">r/Ediwow</p>
-                <p className="text-xs text-text-secondary bg-inherit">23 members</p>
-                </div>
-              </div>
+              <select
+                name="test1"
+                id="test1"
+                onChange={handleSelectChange}
+                value={selectedCommunity} // Set the selected value
+              >
+                <option value="test11">test11</option>
+                <option value="test12">test12</option>
+
+             
+              </select> 
+            
             </div>
           </div>
         </div>

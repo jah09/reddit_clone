@@ -85,4 +85,13 @@
   .custom-scrollbar::-webkit-scrollbar-track {
     background: red;
   }
+  select {
+  -webkit-appearance: none; /* for Safari, Chrome, and other WebKit browsers */
+  -moz-appearance: none; /* for Firefox */
+  /* for the standard */
+  /* appearance: none;  */
+
+  /* removes any background image */
+  /* background-image: none;  */
+}
 }

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import reddit from "@/assets/reddit.svg";
-import appLogo from "@/assets/test2.png";
+import appLogo from "@/assets/Foraverse.svg";
 
 import profile from "@/assets/profile.jpg";
 import qrcode from "@/assets/qrcode.svg";
@@ -30,11 +30,11 @@ function Navbar() {
         <div className="text-3xl font-bold  text-primary  flex  items-center gap-x-2 justify-start ">
           <Link to="/" className="inline-flex">
             {" "}
-            <div className="w-8 h-8 relative overflow-hidden bg-red-900">
+            <div className="w-10 h-10  ">
               <img
-                src={reddit}
+                src={appLogo}
                 alt="logo"
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 object-cover w-full h-full"
+                className="  "
               />
             </div>
             <h1 className="tracking wide text-md ml-2 text-text-primary">

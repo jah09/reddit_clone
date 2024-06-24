@@ -9,6 +9,7 @@ export interface CommunityFlareObject {
 export interface CommunityObject {
   id: number;
   name: string;
+  members:number;
   rules: CommunityRuleObject[];
   flares: CommunityFlareObject[];
   // optional
@@ -18,6 +19,7 @@ function communityData() {
     {
       id: 12,
       name: "CebTech",
+      members: 45,
       rules: [
         {
           id: 1,
@@ -43,6 +45,8 @@ function communityData() {
     {
       id: 13,
       name: "Bisdako",
+      members: 98,
+
       rules: [
         {
           id: 5,

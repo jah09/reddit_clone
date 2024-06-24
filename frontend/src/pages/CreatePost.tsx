@@ -1,16 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import r_icon from "@/assets/r_icon.png";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosCloseCircleOutline} from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
+ 
 import TagModal from "@/components/modals/TagModal";
 import CommunityModal from "@/components/modals/CommunityModal";
-import Select from "react-select";
+
 interface Post {
   title: string;
-  subRedditId: string;
+  subRedditId: number;
   flareId: string;
   body: string;
 }
+
 function CreatePost() {
   //defining the formData
   const [formData, setFormData] = useState<Post>({
@@ -19,31 +21,20 @@ function CreatePost() {
     subRedditId: "",
     flareId: "",
   });
+  const [selectedCommunityName, setSelectedCommunityName] =
+    useState<string>("");
   const [isCommunityInputClick, setIsCommunityInputClick] =
     useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
   //modal
   const [showFlareModal, setIsShowFlareModal] = useState<boolean>(false);
   const [showCommunityModal, setIsShowCommunityModal] =
     useState<boolean>(false);
-
-  // manage an event listener for clicks outside the input element (inputRef.current).
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        inputRef.current &&
-        !inputRef.current?.contains(event.target as Node)
-      ) {
-        setIsCommunityInputClick(false);
-      setIsShowCommunityModal(false)
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
+ 
   //handle onclick of input (select a community)
-  const handleInputClick = () => {
+  const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    event.stopPropagation();
     setIsCommunityInputClick(true);
     setIsShowCommunityModal(true);
 
@@ -51,9 +42,6 @@ function CreatePost() {
     setTimeout(() => {
       inputRef.current?.focus(); // Refocus the input after a short delay
     }, 100);
-  };
-  const handleModalClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent modal click from propagating and closing the modal
   };
 
   //handle form submit
@@ -70,6 +58,7 @@ function CreatePost() {
       [name]: value,
     }));
   };
+
   //get the data input by the user handleTextareaChange
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -78,11 +67,14 @@ function CreatePost() {
       [name]: value,
     }));
   };
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
+
+  const handleCommunitySelect = (selectedCommunity: any) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      subRedditId: selectedCommunity.id,
+    }));
+    setSelectedCommunityName(selectedCommunity.name);
+  };
   return (
     <div className=" ">
       <div className="py-6 px-10">
@@ -108,13 +100,13 @@ const options = [
                   )}
                 </div>
                 <div>
-                  <Select options={options}   />
-                  {/* <input
+                  <input
                     ref={inputRef}
                     type="text"
+                    readOnly
                     id="subRedditId"
                     onClick={handleInputClick}
-                    value={formData.subRedditId}
+                    value={selectedCommunityName}
                     onChange={handleInputChange}
                     name="subRedditId"
                     className={
@@ -123,13 +115,15 @@ const options = [
                         : "rounded-full py-2 px-10 outline-none bg-background-secondary text-text-primary placeholdertext-primary   w-72"
                     }
                     placeholder="Select a community"
-                  /> */}
+                  />
                 </div>
-                {/* <div>
-                  {!isCommunityInputClick && (
-                    <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5 focus:hidden text-neutral bg-transparent" />
+                <div>
+                  {!isCommunityInputClick ? (
+                    <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5   text-neutral bg-transparent" />
+                  ):(
+                    <IoIosCloseCircleOutline className="w-6 h-6 absolute -right-4 top-2   text-neutral bg-transparent cursor-pointer" onClick={}/>
                   )}
-                </div> */}
+                </div>
               </div>
             </div>
             <div className="py-4">
@@ -165,11 +159,11 @@ const options = [
                       id="addTagBtn"
                       onClick={() => setIsShowFlareModal(true)}
                       className={
-                        formData.subRedditId
+                       selectedCommunityName
                           ? "bg-secondary-accent text-sm text-black py-[5px] px-3 rounded-full"
                           : "bg-neutral text-sm text-black py-[5px] px-3 rounded-full"
                       }
-                      disabled={!formData.subRedditId}
+                      disabled={!selectedCommunityName}
                     >
                       Add flare
                     </button>
@@ -205,19 +199,18 @@ const options = [
       {showFlareModal && (
         <TagModal onClose={() => setIsShowFlareModal(false)} />
       )}
-      {/* <div className=" bg-blue-900  " onClick={handleModalClick}>
-        {showCommunityModal && (
-          <CommunityModal onClose={() => setIsShowCommunityModal(false)} />
-        )}
-      </div> */}
-       
-      {/* {showCommunityModal && (
-        <div className="bg-blue-900" onClick={handleModalClick}>
-                    
-          <CommunityModal onClose={() => setIsShowCommunityModal(false)} />
-                  
+
+      {showCommunityModal && (
+        <div
+          // Attach the ref to the modal
+          className="bg-blue-900"
+        >
+          <CommunityModal
+            onClose={() => setIsShowCommunityModal(false)}
+            onCommunitySelect={handleCommunitySelect}
+          />
         </div>
-      )} */}
+      )}
     </div>
   );
 }

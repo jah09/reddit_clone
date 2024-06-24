@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 function LeftSidenav() {
   const community = communityData();
-  console.log("type", community);
+ 
   return (
     <div className="  p-4 h-full text-primary  border-r border-neutral">
       <div className=" ">

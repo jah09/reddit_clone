@@ -3,13 +3,11 @@ import barchart from "@/assets/barchart.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { CgArrowTopRightO } from "react-icons/cg";
+import { IoIosArrowDown } from "react-icons/io";
 import CommunityItems from "@/components/CommunityItems";
 import communityData from "@/data/community";
-import { IoIosArrowDown } from "react-icons/io";
-
 function LeftSidenav() {
-  const community = communityData();
- 
+  const community = communityData(); //static community data3
   return (
     <div className="  p-4 h-full text-primary  border-r border-neutral">
       <div className=" ">
@@ -63,7 +61,7 @@ function LeftSidenav() {
         <div className="mt-6 ">
           <div className="p-2 hover:bg-[#152030]  hover:rounded-lg flex items-center justify-between">
             <p className="bg-inherit text-text-primary">COMMUNITIES</p>
-            <IoIosArrowDown className="text-neutral  w-5 h-5 bg-inherit"/>
+            <IoIosArrowDown className="text-neutral  w-5 h-5 bg-inherit" />
           </div>
 
           <div className="mt-2 hover:bg-[#152030]  hover:rounded-lg  ">
@@ -77,7 +75,7 @@ function LeftSidenav() {
 
           <div className="mt-2">
             {community.map((item) => (
-              <CommunityItems community={item} key={item.id}/>
+              <CommunityItems community={item} key={item.id} />
             ))}
           </div>
         </div>

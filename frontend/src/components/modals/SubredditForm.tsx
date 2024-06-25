@@ -4,15 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
+
+//strucure of the Rule Object
 interface Rule {
   id: string; // Use string IDs for flexibility
   value: string;
 }
+//strucure of the Flare Object
 interface Flare {
   id: string; // Use string IDs for flexibility
   value: string;
 }
-
+//strucure of the Subreddit Object
 interface SubReddit {
   id: string;
   name: string;
@@ -22,7 +25,8 @@ interface SubReddit {
 }
 
 function SubredditForm() {
-  //form data
+  //--state--
+  //form data of the Subreddit object
   const [formData, setFormData] = useState<SubReddit>({
     id: uuidv4(),
     name: "",
@@ -30,29 +34,41 @@ function SubredditForm() {
     rules: [{ id: uuidv4(), value: "" }],
     flare: [{ id: uuidv4(), value: "" }],
   });
-  console.log("the formdata", formData);
-  const navigate = useNavigate();
-  //modal
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  function closeModal() {
+  const navigate = useNavigate();
+
+  //--event handler--
+  const closeModal = () => {
     setModalIsOpen(false);
     navigate("/");
-  }
+  };
 
-  //handleAddNewRule -> click the btn then it will add new rule input
+  //handle add rule, click the btn then it will add a rule input field
   const handleAddNewRule = () => {
     if (formData.rules.length < 3) {
       const nextRuleId = uuidv4();
       setFormData({
-        ...formData, //...formData: Spreads the existing properties of formData to keep them.
-        //rules: [...formData.rules, { ... }]: Creates a new rules array
-        //formData.rules: Includes all existing rules.
+        ...formData,
         rules: [...formData.rules, { id: nextRuleId, value: "" }],
-      });
+      }); //...formData: Spreads the existing properties of formData to keep them.
+      //rules: [...formData.rules, { ... }]: Creates a new rules array
+      //formData.rules: Includes all existing rules.
+    }
+  };
+  //handle add flare, click the btn then it will add a flare input field
+  const handleAddFlare = () => {
+    if (formData.flare.length < 3) {
+      const nextFlareId = uuidv4();
+      setFormData({
+        ...formData,
+        flare: [...formData.flare, { id: nextFlareId, value: "" }],
+      }); //...formData: Spreads the existing properties of formData to keep them.
+      //flare: [...formData.flare, { ... }]: Creates a new flare array
+      //formData.flare: Includes all existing flare.
     }
   };
 
-  //handleInputchange for the community name
+  //get the input data for the community name
   const handleInputchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -61,44 +77,31 @@ function SubredditForm() {
     }));
   };
 
-  //handle onchange for the rules
+  //get the input data for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     //new rules
     const newRules = formData.rules.map((rule, index) =>
-      index === newIndex ? { ...rule, value: event.target.value } : rule
+      index === newIndex ? { ...rule, value: event.target.value } : rule,
     );
     setFormData({ ...formData, rules: newRules });
   };
-  //handle onchange for the flare
-  const handleInputAddFlare = (
+  //get the input data for the flare
+  const handleInputChangeAddFlare = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     //new flare
     const newflare = formData.flare.map((flare, index) =>
-      index === newIndex ? { ...flare, value: event.target.value } : flare
+      index === newIndex ? { ...flare, value: event.target.value } : flare,
     );
 
     setFormData({ ...formData, flare: newflare });
   };
 
-  //handle add flare-> click the btn then it will add a flare
-  const handleAddFlare = () => {
-    if (formData.flare.length < 3) {
-      const nextFlareId = uuidv4();
-      setFormData({
-        ...formData, //...formData: Spreads the existing properties of formData to keep them.
-        //flare: [...formData.flare, { ... }]: Creates a new flare array
-        //formData.flare: Includes all existing flare.
-        flare: [...formData.flare, { id: nextFlareId, value: "" }],
-      });
-    }
-  };
-
-  //handle submit bttn
+  //handle for submit button or create subreddit
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
@@ -206,7 +209,7 @@ function SubredditForm() {
                             id={flare.id}
                             placeholder={`Flare ${key + 1}`}
                             value={flare.value}
-                            onChange={(e) => handleInputAddFlare(e, key)}
+                            onChange={(e) => handleInputChangeAddFlare(e, key)}
                             className="px-4 py-4 rounded-2xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary my-2"
                           />
                         ))}
@@ -219,7 +222,9 @@ function SubredditForm() {
                     <p className="font-medium text-text-primary text-xl">
                       r/communityname
                     </p>{" "}
-                    <p className="text-text-secondary text-sm">1 member . 1 online</p>
+                    <p className="text-text-secondary text-sm">
+                      1 member . 1 online
+                    </p>
                   </div>
                 </div>
               </div>

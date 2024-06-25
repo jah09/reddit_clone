@@ -1,11 +1,9 @@
 import React from "react";
 import { FaRegHeart } from "react-icons/fa";
 import profile from "@/assets/profile.jpg";
-import barchart from "@/assets/barchart.svg";
 
-import {CommunityObject} from '@/data/community'
-function CommunityItems({community}: { community: CommunityObject }) {
-
+import { CommunityObject } from "@/data/community";
+function CommunityItems({ community }: { community: CommunityObject }) {
   return (
     <div
       className="py-2 px-2 gap-x-2 hover:bg-[#152030]  hover:rounded-lg  cursor-pointer flex  items-center mt-0.5 "

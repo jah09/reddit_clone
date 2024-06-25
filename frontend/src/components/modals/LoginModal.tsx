@@ -4,22 +4,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
-interface FormData {
+//structure for the User object
+interface User {
   username: string;
   password: string;
 }
 function LoginModal() {
-  //form
-  const [formData, setFormData] = useState<FormData>({
+  //--state--
+  //formData for the User Object
+  const [formData, setFormData] = useState<User>({
     username: "",
     password: "",
   });
-  const navigate = useNavigate();
-  //modal
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //for modal open
+  const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false); //showing the password
   const [type, setType] = useState<string>("password");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false); //state to hold for loading
+  const navigate = useNavigate();
+
+  //--event handler--
   const closeModal = () => {
     setModalIsOpen(false);
     navigate("/");

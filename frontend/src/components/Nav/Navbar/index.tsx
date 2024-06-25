@@ -18,10 +18,12 @@ import { BsBoxArrowInRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  //--state---
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
-
-  const toggleKebabMenu = () => {
+  //--event handler---
+  //click the kebab and show the menu
+  const handleClickKebabMenu = () => {
     setIsKebabClicked(!isKebabClicked);
   };
   return (
@@ -31,11 +33,7 @@ function Navbar() {
           <Link to="/" className="inline-flex">
             {" "}
             <div className="w-10 h-10  ">
-              <img
-                src={appLogo}
-                alt="logo"
-                className="  "
-              />
+              <img src={appLogo} alt="logo" className="  " />
             </div>
             <h1 className="tracking wide text-md ml-2 text-text-primary">
               Foraverse{" "}
@@ -95,7 +93,7 @@ function Navbar() {
                 </button>
               </Link>
               <div className="relative">
-                <div className="relative" onClick={toggleKebabMenu}>
+                <div className="relative" onClick={handleClickKebabMenu}>
                   <GoKebabHorizontal className="relative z-10 w-6 h-6 cursor-pointer text-neutral" />
                 </div>
                 {isKebabClicked && (

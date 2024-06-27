@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import r_icon from "@/assets/r_icon.png";
-import { IoIosArrowDown, IoIosCloseCircleOutline} from "react-icons/io";
+import { IoIosArrowDown, IoIosCloseCircleOutline } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
- 
+
 import TagModal from "@/components/modals/TagModal";
 import CommunityModal from "@/components/modals/CommunityModal";
 
+// Define the structure of a Post object
 interface Post {
   title: string;
   subRedditId: number;
@@ -14,43 +15,42 @@ interface Post {
 }
 
 function CreatePost() {
-  //defining the formData
+  // --- State ---
   const [formData, setFormData] = useState<Post>({
     body: "",
     title: "",
-    subRedditId: "",
+    subRedditId: 0,
     flareId: "",
-  });
+  }); //defining the formData for the POST object
   const [selectedCommunityName, setSelectedCommunityName] =
-    useState<string>("");
+    useState<string>(""); //
   const [isCommunityInputClick, setIsCommunityInputClick] =
-    useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  //modal
-  const [showFlareModal, setIsShowFlareModal] = useState<boolean>(false);
+    useState<boolean>(false); //clicked the "Select a community" input
+  const [showFlareModal, setIsShowFlareModal] = useState<boolean>(false); //show the Flare Modal
   const [showCommunityModal, setIsShowCommunityModal] =
-    useState<boolean>(false);
- 
-  //handle onclick of input (select a community)
+    useState<boolean>(false); //show the Community Modal
+  // --- refs ---
+  const inputRef = useRef<HTMLInputElement>(null); //reference to "Select a community" input
+
+  // --- event handler ---
+  //handle click  of input (select a community)
   const handleInputClick = (event: React.MouseEvent<HTMLInputElement>) => {
     event.stopPropagation();
     setIsCommunityInputClick(true);
     setIsShowCommunityModal(true);
-
     //after the modal will open, it will back to refocus in the input
     setTimeout(() => {
       inputRef.current?.focus(); // Refocus the input after a short delay
     }, 100);
   };
 
-  //handle form submit
+  //handle form submit of POST object
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("form", formData);
   };
 
-  //get the data input by the user handleTextareaChange
+  //get the data by the user in the input fields
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -59,7 +59,7 @@ function CreatePost() {
     }));
   };
 
-  //get the data input by the user handleTextareaChange
+  //get the data by the user in the textarea fields
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -68,12 +68,21 @@ function CreatePost() {
     }));
   };
 
+  //user select a community from CommunityModal
   const handleCommunitySelect = (selectedCommunity: any) => {
     setFormData((prevData) => ({
       ...prevData,
       subRedditId: selectedCommunity.id,
     }));
     setSelectedCommunityName(selectedCommunity.name);
+    setIsShowCommunityModal(false);
+  };
+  //clear the selected community in the input field
+  const handleClearSelectedCommunity = () => {
+    setSelectedCommunityName("");
+    setTimeout(() => {
+      setIsCommunityInputClick(false);
+    }, 500);
   };
   return (
     <div className=" ">
@@ -120,8 +129,11 @@ function CreatePost() {
                 <div>
                   {!isCommunityInputClick ? (
                     <IoIosArrowDown className="w-5 h-5 absolute right-3 top-2.5   text-neutral bg-transparent" />
-                  ):(
-                    <IoIosCloseCircleOutline className="w-6 h-6 absolute -right-4 top-2   text-neutral bg-transparent cursor-pointer" onClick={}/>
+                  ) : (
+                    <IoIosCloseCircleOutline
+                      className="w-6 h-6 absolute -right-4 top-2   text-neutral bg-transparent cursor-pointer"
+                      onClick={handleClearSelectedCommunity}
+                    />
                   )}
                 </div>
               </div>
@@ -159,7 +171,7 @@ function CreatePost() {
                       id="addTagBtn"
                       onClick={() => setIsShowFlareModal(true)}
                       className={
-                       selectedCommunityName
+                        selectedCommunityName
                           ? "bg-secondary-accent text-sm text-black py-[5px] px-3 rounded-full"
                           : "bg-neutral text-sm text-black py-[5px] px-3 rounded-full"
                       }
@@ -199,14 +211,10 @@ function CreatePost() {
       {showFlareModal && (
         <TagModal onClose={() => setIsShowFlareModal(false)} />
       )}
-
       {showCommunityModal && (
-        <div
-          // Attach the ref to the modal
-          className="bg-blue-900"
-        >
+        <div>
           <CommunityModal
-            onClose={() => setIsShowCommunityModal(false)}
+            closeCommunityModal={() => setIsShowCommunityModal(false)}
             onCommunitySelect={handleCommunitySelect}
           />
         </div>

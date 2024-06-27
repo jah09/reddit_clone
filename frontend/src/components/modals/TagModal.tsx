@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 
+//Structure of the Props
 interface TagModalProps {
   onClose: () => void;
 }
 function TagModal({ onClose }: TagModalProps) {
-  //modal
+  //--state--
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  function closeModal() {
+
+  //--event handler--
+  //close the modal
+  const closeModal = () => {
     setModalIsOpen(false);
     onClose();
-  }
+  };
 
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
@@ -26,7 +30,9 @@ function TagModal({ onClose }: TagModalProps) {
               <h1 className="text-text-primary font-semibold text-2xl bg-inherit">
                 Add flares
               </h1>
-              <p className="text-text-primary mt-4 bg-inherit">f/ SubbName flair</p>
+              <p className="text-text-primary mt-4 bg-inherit">
+                f/ SubbName flair
+              </p>
             </div>
             <div
               className="flex place-items-center bg-background-secondary-hover marker: w-8 h-8  rounded-full "
@@ -56,7 +62,10 @@ function TagModal({ onClose }: TagModalProps) {
                 id="noFlare"
                 value="No flare"
               />
-              <label htmlFor="noFlare" className="px-6 text-text-primary bg-inherit">
+              <label
+                htmlFor="noFlare"
+                className="px-6 text-text-primary bg-inherit"
+              >
                 No flare
               </label>
             </div>

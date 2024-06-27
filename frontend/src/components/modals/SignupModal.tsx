@@ -7,30 +7,40 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { generateUsername } from "unique-username-generator";
 import Modal from "react-modal";
 import Swal from "sweetalert2";
-interface FormData {
+
+interface User {
   username: string;
   password: string;
   karma: number;
   displayname: string;
 }
 function SignupModal() {
-  //generate a unique display name
-  const username = generateUsername();
-  const [formData, setFormData] = useState<FormData>({
+  //--state--
+  const username = generateUsername(); //generate a unique display name
+  const [formData, setFormData] = useState<User>({
     username: "",
     password: "",
     karma: 0,
     displayname: username,
-  });
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false);
+  }); //formdata for the USER object
+  const [isLoading, setIsLoading] = useState<boolean>(false); //state to hold for loading
+  const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false); //showing the password
   const [type, setType] = useState<string>("password");
-  //modals
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //for modal open
+  const navigate = useNavigate();
+
+  //--event handler--
   const closeModal = () => {
     setModalIsOpen(false);
     navigate("/");
+  };
+  //get the data input by the user
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   //handle show password
@@ -71,14 +81,6 @@ function SignupModal() {
     }
   };
 
-  //get the data input by the user
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
   return (
     <div className="overflow-y-auto sm:p-0 pt-2 pr-4 pb-20 pl-4">
       <Modal
@@ -181,15 +183,15 @@ function SignupModal() {
                   </Link>
                 </p>
                 <div className=" bg-inherit ">
-                  <button type="submit"
+                  <button
+                    type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
-                   
                   >
                     {" "}
                     {isLoading && (
                       <svg
                         aria-hidden="true"
-                        className="  w-5 h-5 mr-3 text-sky-200 animate-spin fill-gray-700"
+                        className="  w-5 h-5 mr-3 text-sky-200 animate-spin fill-gray-700 bg-inherit"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"

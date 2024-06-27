@@ -1,4 +1,4 @@
-export  interface CommunityRuleObject {
+export interface CommunityRuleObject {
   id: number;
   description: string;
 }
@@ -9,7 +9,7 @@ export interface CommunityFlareObject {
 export interface CommunityObject {
   id: number;
   name: string;
-  members:number;
+  members: number;
   rules: CommunityRuleObject[];
   flares: CommunityFlareObject[];
   // optional

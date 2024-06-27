@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from '@/components/Nav/Navbar/index'
+import Navbar from "@/components/Nav/Navbar/index";
 import LeftSidenav from "@/components/Nav/SideNav/index";
 import RecentPost from "@/components/RecentPost";
 import { Outlet, useLocation } from "react-router-dom";
 
 function Layout() {
-  const location = useLocation();
-
+  const location = useLocation(); //current URL
   return (
     <div>
       <Navbar />

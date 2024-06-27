@@ -47,7 +47,6 @@ function PostItem() {
             </div>
             0
             <div className="bg-inherit rounded-full flex items-center hover:bg-background-primary p-1">
-
               <button className="">
                 <PiArrowFatDownLight className="w-6 h-5  text-neutral  bg-inherit hover:text-secondary-accent" />
               </button>{" "}

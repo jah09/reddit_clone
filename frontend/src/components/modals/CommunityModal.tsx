@@ -1,20 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import profile from "@/assets/profile.jpg";
 import { IoCloseOutline } from "react-icons/io5";
 import communityData from "@/data/community";
-
 import Modal from "react-modal";
+// --Structure of the Props--
 interface CommunityModal {
-  onClose: () => void;
   onCommunitySelect: (selectedCommunity: any) => void;
+  closeCommunityModal: () => void;
 }
-function CommunityModal({ onClose, onCommunitySelect }: CommunityModal) {
-  //modals
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  const community = communityData(); //community data
-
-  //handle the selected community
-
+function CommunityModal({
+  closeCommunityModal,
+  onCommunitySelect,
+}: CommunityModal) {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //state for the modal
+  const community = communityData(); //static community data
   return (
     <div className="">
       <Modal
@@ -31,7 +30,7 @@ function CommunityModal({ onClose, onCommunitySelect }: CommunityModal) {
           <div className="flex justify-end bg-inherit">
             <div
               className="flex place-items-center bg-background-secondary-hover  py-2 w-6 h-6  rounded-full "
-              onClick={() => onClose()}
+              onClick={closeCommunityModal}
             >
               <IoCloseOutline className="bg-inherit w-6 h-6  cursor-pointer text-neutral rounded-full" />
             </div>

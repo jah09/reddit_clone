@@ -7,8 +7,6 @@ interface RegisterPayload {
 }
 export async function signUp(payload: RegisterPayload) {
   console.log("payload", payload);
-  const { data } = await axiosClient.post("auth/register", payload, {
-    headers: { "Access-Control-Allow-Origin": "*" },
-  });
+  const { data } = await axiosClient.post("auth/register", payload);
   return data;
 }

@@ -6,8 +6,10 @@ import { GrPowerReset } from "react-icons/gr";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { generateUsername } from "unique-username-generator";
 import Modal from "react-modal";
-import Swal from "sweetalert2";
 
+  import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import { setCookie } from "@/utilities/cookie/cookie.ts";
 interface User {
   username: string;
   password: string;
@@ -52,7 +54,7 @@ function SignupModal() {
       setIsPasswordShow(false);
       setType("password");
     }
-  };
+  };                                                 
   //generate new display name
   const generateNewDisplayName = () => {
     const newDisplayName = generateUsername();
@@ -68,13 +70,15 @@ function SignupModal() {
       setIsLoading(true);
       const response = await signUpAPI.signUp(formData);
       setIsLoading(false);
+      setCookie("access_token", response.token, 7);
 
-      console.log("signup response", response);
-      //  Swal.fire({
-      //    title: "Login",
-      //    text: "Login successfully!",
-      //    icon: "success",
-      //  });
+      // console.log("signup response", token);
+
+      // Swal.fire({
+      //   title: "Login",
+      //   text: "Login successfully!",
+      //   icon: "success",
+      // });
       setFormData({ username: "", password: "", karma: 0, displayname: "" });
     } catch (e) {
       console.log("Cant signup", e);
@@ -83,6 +87,7 @@ function SignupModal() {
 
   return (
     <div className="overflow-y-auto sm:p-0 pt-2 pr-4 pb-20 pl-4">
+      
       <Modal
         appElement={document.getElementById("root")}
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "

@@ -10,6 +10,7 @@ import SubredditForm from "./components/modals/SubredditForm";
 import CreatePost from "./pages/CreatePost";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TestComponent from "./components/TestComponent";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/create-subreddit-form" element={<SubredditForm />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/popular" element={<Popular />} />
+          {/* <Route path="/test" element={<TestComponent />} /> */}
+
           <Route path="/login" element={<LoginModal />} />
           <Route path="/signup" element={<SignupModal />} />
         </Route>

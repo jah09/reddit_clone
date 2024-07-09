@@ -70,7 +70,11 @@ function SignupModal() {
       setIsLoading(true);
       const response = await signUpAPI.signUp(formData);
       setIsLoading(false);
-      setCookie("access_token", response.token, 7);
+      console.log("signup token", response.token);
+      alert("Sign up successfully!");
+      navigate("/login");
+      setModalIsOpen(false);
+      //setCookie("access_token", response.token, 7);
 
       // console.log("signup response", token);
 

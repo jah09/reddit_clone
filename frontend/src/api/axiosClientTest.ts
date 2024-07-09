@@ -3,7 +3,7 @@ import { getCookie, deleteCookie } from "@/utilities/cookie/cookie.ts";
 import { useNavigate } from "react-router-dom";
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL_TEST,
 });
 // const noAuthRequiredUrls = ["/login"];
 
@@ -27,7 +27,7 @@ axiosClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 403) {
       const navigate = useNavigate();
       deleteCookie("access_token");
       // router.push({ name: "Signin" });

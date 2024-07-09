@@ -3,6 +3,10 @@ import Modal from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import * as signInAPI from "@/services/user";
+import { setCookie } from "@/utilities/cookie/cookie.ts";
+import TestComponent from "@/components/TestComponent";
+import axios from "axios";
 
 //structure for the User object
 interface User {
@@ -45,6 +49,37 @@ function LoginModal() {
       ...prevData,
       [name]: value,
     }));
+  };
+   
+  //submit the form
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true);
+      const response = await signInAPI.signIn(formData);
+      const token = response.token;
+      setIsLoading(false);
+
+      console.log("signin token", response.token);
+
+      if (token) {
+        setCookie("access_token", token, 7);
+        navigate("/home");
+      } else {
+        navigate("*"); //return a
+      }
+      // console.log("signup response", token);
+
+      // Swal.fire({
+      //   title: "Login",
+      //   text: "Login successfully!",
+      //   icon: "success",
+      // });
+      //  setFormData({ username: "", password: "", karma: 0, displayname: "" });
+    } catch (e) {
+      console.log("Cant signin", e);
+    }
   };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
@@ -126,13 +161,14 @@ function LoginModal() {
                 </p>
                 <div className=" bg-inherit ">
                   <button
+                    onClick={handleFormSubmit}
                     type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
                   >
                     {isLoading && (
                       <svg
                         aria-hidden="true"
-                        className="  w-5 h-5 mr-3 text-sky-200 animate-spin fill-gray-700"
+                        className="  w-5 h-5 mr-3 text-sky-200 animate-spin fill-gray-700 bg-inherit"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"

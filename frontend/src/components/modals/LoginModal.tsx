@@ -65,7 +65,7 @@ function LoginModal() {
 
       if (token) {
         setCookie("access_token", token, 7);
-        navigate("/home");
+      //  navigate("/home");
       } else {
         navigate("*"); //return a
       }
@@ -114,7 +114,11 @@ function LoginModal() {
               .
             </p>
             <div className="mt-8 bg-inherit">
-              <form action=" " className="bg-inherit">
+              <form
+                action=" "
+                className="bg-inherit"
+                onSubmit={handleFormSubmit}
+              >
                 <input
                   value={formData.username}
                   type="text"
@@ -161,7 +165,6 @@ function LoginModal() {
                 </p>
                 <div className=" bg-inherit ">
                   <button
-                    onClick={handleFormSubmit}
                     type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
                   >

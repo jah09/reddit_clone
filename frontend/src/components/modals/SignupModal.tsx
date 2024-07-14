@@ -6,10 +6,12 @@ import { GrPowerReset } from "react-icons/gr";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { generateUsername } from "unique-username-generator";
 import Modal from "react-modal";
-
-  import "react-toastify/dist/ReactToastify.css";
+import axios, { AxiosError } from "axios";
+import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
 import { setCookie } from "@/utilities/cookie/cookie.ts";
+import { ExecException } from "child_process";
+import { execPath } from "process";
 interface User {
   username: string;
   password: string;
@@ -30,7 +32,7 @@ function SignupModal() {
   const [type, setType] = useState<string>("password");
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //for modal open
   const navigate = useNavigate();
-
+  const [error, setError] = useState<string>("");
   //--event handler--
   const closeModal = () => {
     setModalIsOpen(false);
@@ -54,7 +56,7 @@ function SignupModal() {
       setIsPasswordShow(false);
       setType("password");
     }
-  };                                                 
+  };
   //generate new display name
   const generateNewDisplayName = () => {
     const newDisplayName = generateUsername();
@@ -70,10 +72,14 @@ function SignupModal() {
       setIsLoading(true);
       const response = await signUpAPI.signUp(formData);
       setIsLoading(false);
-      console.log("signup token", response.token);
-      alert("Sign up successfully!");
+    
+      if (response.statusCode == 201) {
+        alert(response.message);
+      }
+
       navigate("/login");
       setModalIsOpen(false);
+
       //setCookie("access_token", response.token, 7);
 
       // console.log("signup response", token);
@@ -84,14 +90,19 @@ function SignupModal() {
       //   icon: "success",
       // });
       setFormData({ username: "", password: "", karma: 0, displayname: "" });
-    } catch (e) {
-      console.log("Cant signup", e);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data.statusCode === 409) {
+          setError(error.response.data.message);
+        } else {
+          alert("Network error or server issue. Please try again later.");
+        }
+      }
     }
   };
 
   return (
     <div className="overflow-y-auto sm:p-0 pt-2 pr-4 pb-20 pl-4">
-      
       <Modal
         appElement={document.getElementById("root")}
         className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "
@@ -181,7 +192,11 @@ function SignupModal() {
                     className="px-4 py-4 rounded-3xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0  bg-background-primary"
                   />
                 </div>
-
+                <div className="bg-inherit mt-4">
+                  {error && (
+                    <p className="bg-inherit text-red-500">{error} *</p>
+                  )}
+                </div>
                 <p className="text-primary mt-10  bg-inherit text-text-secondary">
                   Already have an account?
                   <Link to="/login" className=" bg-inherit">

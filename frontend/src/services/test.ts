@@ -12,4 +12,3 @@ export async function getTest(payload: GetTestPayload) {
   });
   return data;
 }
- 

@@ -50,7 +50,7 @@ function LoginModal() {
       [name]: value,
     }));
   };
-   
+
   //submit the form
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,18 +58,18 @@ function LoginModal() {
     try {
       setIsLoading(true);
       const response = await signInAPI.signIn(formData);
-      const token = response.token;
+      const token = response.data.User.token;
       setIsLoading(false);
 
-      console.log("signin token", response.token);
+      console.log("signin response", response);
+      console.log("signin token", token);
 
-      if (token) {
+      if (response.statusCode === 200 && token) {
+        alert(response.message);
         setCookie("access_token", token, 7);
-      //  navigate("/home");
+        navigate("/");
       } else {
-        navigate("*"); //return a
       }
-      // console.log("signup response", token);
 
       // Swal.fire({
       //   title: "Login",
@@ -117,7 +117,7 @@ function LoginModal() {
               <form
                 action=" "
                 className="bg-inherit"
-                onSubmit={handleFormSubmit}
+                //onSubmit={(event)=>handleFormSubmit(event)}
               >
                 <input
                   value={formData.username}
@@ -167,6 +167,7 @@ function LoginModal() {
                   <button
                     type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
+                    onClick={handleFormSubmit}
                   >
                     {isLoading && (
                       <svg

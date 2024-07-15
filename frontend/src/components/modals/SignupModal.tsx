@@ -72,7 +72,7 @@ function SignupModal() {
       setIsLoading(true);
       const response = await signUpAPI.signUp(formData);
       setIsLoading(false);
-    
+
       if (response.statusCode == 201) {
         alert(response.message);
       }

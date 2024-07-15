@@ -19,7 +19,7 @@ axiosClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 axiosClient.interceptors.response.use(
@@ -34,7 +34,7 @@ axiosClient.interceptors.response.use(
       navigate("/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosClient;

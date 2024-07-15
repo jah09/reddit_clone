@@ -17,6 +17,6 @@ export async function signUp(payload: RegisterPayload) {
 
 export async function signIn(payload: SignInPayload) {
   console.log("payload", payload);
-    const { data } = await axiosClient.post("auth/login", payload);
-    return data;
+  const { data } = await axiosClient.post("auth/login", payload);
+  return data;
 }

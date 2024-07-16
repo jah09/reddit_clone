@@ -20,7 +20,7 @@ function App() {
         <Route path="/signup" element={<SignupModal />} />
 
         <Route
-          element={<PrivateRoute />} // Wrap Layout with PrivateRoute
+          element={<PrivateRoute />}  
         >
           <Route element={<Layout />}>
             <Route index element={<Home />} />

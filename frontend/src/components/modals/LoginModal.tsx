@@ -77,8 +77,15 @@ function LoginModal() {
       //   icon: "success",
       // });
       //  setFormData({ username: "", password: "", karma: 0, displayname: "" });
-    } catch (e) {
-      console.log("Cant signin", e);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log('error',error)
+        // if (error.response?.data.statusCode === 409) {
+         
+        // } else {
+        //   alert("Network error or server issue. Please try again later.");
+        // }
+      }
     }
   };
   return (
@@ -115,9 +122,9 @@ function LoginModal() {
             </p>
             <div className="mt-8 bg-inherit">
               <form
-                action=" "
+                action=""
                 className="bg-inherit"
-                //onSubmit={(event)=>handleFormSubmit(event)}
+                 onSubmit={handleFormSubmit}
               >
                 <input
                   value={formData.username}
@@ -167,7 +174,7 @@ function LoginModal() {
                   <button
                     type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
-                    onClick={handleFormSubmit}
+                     
                   >
                     {isLoading && (
                       <svg

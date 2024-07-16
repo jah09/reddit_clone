@@ -35,13 +35,14 @@
 // };
 
 import { getCookie } from "../cookie/cookie";
-
+import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
   //getting token from local storage
-  const usetToken = getCookie("access_token");
-  console.log("token is", usetToken);
+  const userToken = getCookie("access_token");
+   
   //checking whether token is preset or not
-  if (usetToken) {
+  if (userToken) {
+   
     return true;
   } else {
     return false;

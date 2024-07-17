@@ -4,16 +4,18 @@ import { useAuth } from "@/utilities/hooks/useAuth";
 function PrivateRoutes() {
   const isAuthenticated = useAuth();
   const location = useLocation();
-  console.log("location",location)
-  //  return isAuthenticated ? <Outlet />:  <Navigate to="/login" state={{ from: location }} replace /> // Pass location
-  
- 
-    
-  
+
+   if (
+     isAuthenticated &&
+     (location.pathname === "/login" || location.pathname === "/signup")
+   ) {
+     // Redirect to a default page (e.g., home or dashboard) if already logged in
+     return <Navigate to="/" replace />;
+   }
    return isAuthenticated ? (
      <Outlet />
    ) : (
-     <Navigate to="/login" state={{ from: location }} replace /> // Pass location
+     <Navigate to="/login" state={{ from: location }} replace /> 
    );
 }
 

@@ -9,6 +9,8 @@ import SignupModal from "./components/modals/SignupModal";
 import SubredditForm from "./components/modals/SubredditForm";
 import CreatePost from "./pages/CreatePost";
 import PrivateRoute from "@/utilities/privateRoute";
+import PublicRoute from "@/utilities/publicRoute";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TestComponent from "./components/TestComponent";
 
@@ -16,14 +18,17 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route element={<PublicRoute/>}>
         <Route path="/login" element={<LoginModal />} />
         <Route path="/signup" element={<SignupModal />} />
+        </Route>
+
 
         <Route
           element={<PrivateRoute />}  
         >
           <Route element={<Layout />}>
-            <Route index element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/create-subreddit-form" element={<SubredditForm />} />
             <Route path="/create-post" element={<CreatePost />} />
             <Route path="/popular" element={<Popular />} />   {" "}

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import * as signInAPI from "@/services/user";
-import { setCookie } from "@/utilities/cookie/cookie.ts";
+import { getCookie, setCookie } from "@/utilities/cookie/cookie.ts";
 import TestComponent from "@/components/TestComponent";
+import Swal from "sweetalert2";
 import axios from "axios";
+import { setTimeout } from "timers/promises";
 
 //structure for the User object
 interface User {
@@ -65,23 +67,30 @@ function LoginModal() {
       console.log("signin token", token);
 
       if (response.statusCode === 200 && token) {
-        alert(response.message);
+        //  alert(response.message);
+        setFormData({ username: "", password: "" });
         setCookie("access_token", token, 7);
-        navigate("/");
+        Swal.fire({
+          title: "Login",
+          text: response.message,
+          icon: "success",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
+        });
       } else {
+        // alert(response.message);
+        Swal.fire({
+          title: "Login",
+          text: "Login failed",
+          icon: "error",
+        });
       }
-
-      // Swal.fire({
-      //   title: "Login",
-      //   text: "Login successfully!",
-      //   icon: "success",
-      // });
-      //  setFormData({ username: "", password: "", karma: 0, displayname: "" });
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        console.log('error',error)
+        console.log("error", error);
         // if (error.response?.data.statusCode === 409) {
-         
         // } else {
         //   alert("Network error or server issue. Please try again later.");
         // }
@@ -124,7 +133,7 @@ function LoginModal() {
               <form
                 action=""
                 className="bg-inherit"
-                 onSubmit={handleFormSubmit}
+                onSubmit={handleFormSubmit}
               >
                 <input
                   value={formData.username}
@@ -174,7 +183,6 @@ function LoginModal() {
                   <button
                     type="submit"
                     className="p-4 rounded-3xl w-full outline-none mt-10 bg-primary-accent cursor-pointer text-text-primary  tracking-wide font-medium flex items-center justify-center"
-                     
                   >
                     {isLoading && (
                       <svg

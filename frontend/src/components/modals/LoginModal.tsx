@@ -68,7 +68,6 @@ function LoginModal() {
 
       if (response.statusCode === 200 && token) {
         //  alert(response.message);
-        setFormData({ username: "", password: "" });
         setCookie("access_token", token, 7);
         Swal.fire({
           title: "Login",
@@ -79,6 +78,7 @@ function LoginModal() {
             navigate("/");
           }
         });
+        setFormData({ username: "", password: "" });
       } else {
         // alert(response.message);
         Swal.fire({
@@ -101,7 +101,7 @@ function LoginModal() {
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
       <Modal
         appElement={document.getElementById("root")}
-        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "
+        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl"
         isOpen={modalIsOpen}
       >
         <div className="inline-block text-left bg-background-secondary min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-7">

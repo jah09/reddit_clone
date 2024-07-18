@@ -105,7 +105,7 @@ function SignupModal() {
     <div className="overflow-y-auto sm:p-0 pt-2 pr-4 pb-20 pl-4">
       <Modal
         appElement={document.getElementById("root")}
-        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   "
+        className="flex justify-center items-end text-center min-h-screen sm:block  bg-[#00000099]   backdrop-blur-4xl "
         isOpen={modalIsOpen}
       >
         <div className="inline-block text-left bg-background-secondary min-h-full rounded-xl overflow-hidden align-bottom transition-all transform shadow-2xl p-8 sm:align-middle sm:max-w-xl sm:w-full mt-7">

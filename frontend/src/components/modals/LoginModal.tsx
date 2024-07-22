@@ -9,7 +9,7 @@ import TestComponent from "@/components/TestComponent";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { setTimeout } from "timers/promises";
-
+import AlertModal from '@/components/alert/index'
 //structure for the User object
 interface User {
   username: string;
@@ -23,6 +23,7 @@ function LoginModal() {
     password: "",
   });
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //for modal open
+  const [alertShowModal,setAlertShowModal] = useState<boolean>(false)
   const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false); //showing the password
   const [type, setType] = useState<string>("password");
   const [isLoading, setIsLoading] = useState<boolean>(false); //state to hold for loading
@@ -56,7 +57,7 @@ function LoginModal() {
   //submit the form
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    setAlertShowModal(true);
     try {
       setIsLoading(true);
       const response = await signInAPI.signIn(formData);
@@ -68,16 +69,16 @@ function LoginModal() {
 
       if (response.statusCode === 200 && token) {
         //  alert(response.message);
-        setCookie("access_token", token, 7);
-        Swal.fire({
-          title: "Login",
-          text: response.message,
-          icon: "success",
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/");
-          }
-        });
+       // setCookie("access_token", token, 7);
+        // Swal.fire({
+        //   title: "Login",
+        //   text: response.message,
+        //   icon: "success",
+        // }).then((result) => {
+        //   if (result.isConfirmed) {
+        //     navigate("/");
+        //   }
+        // });
         setFormData({ username: "", password: "" });
       } else {
         // alert(response.message);
@@ -210,6 +211,14 @@ function LoginModal() {
           </div>
         </div>
       </Modal>
+      {/* {alertShowModal && (<AlertModal />)} */}
+      {alertShowModal && (
+        <AlertModal
+          title="title1"
+          message="messge1"
+          showmodal={alertShowModal}
+        />
+      )}
     </div>
   );
 }

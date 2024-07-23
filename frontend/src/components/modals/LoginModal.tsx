@@ -9,11 +9,15 @@ import TestComponent from "@/components/TestComponent";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { setTimeout } from "timers/promises";
-import AlertModal from '@/components/alert/index'
+import AlertModal from "@/components/alert/index";
 //structure for the User object
 interface User {
   username: string;
   password: string;
+}
+export interface AlertObject {
+  title: string;
+  message: string;
 }
 function LoginModal() {
   //--state--
@@ -23,11 +27,12 @@ function LoginModal() {
     password: "",
   });
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true); //for modal open
-  const [alertShowModal,setAlertShowModal] = useState<boolean>(false)
+  const [alertShowModal, setAlertShowModal] = useState<boolean>(false);
   const [isPasswordShow, setIsPasswordShow] = useState<boolean>(false); //showing the password
   const [type, setType] = useState<string>("password");
   const [isLoading, setIsLoading] = useState<boolean>(false); //state to hold for loading
   const navigate = useNavigate();
+  const [alert, setAlert] = useState<AlertObject>({ title: "", message: "" });
 
   //--event handler--
   const closeModal = () => {
@@ -57,44 +62,39 @@ function LoginModal() {
   //submit the form
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setAlertShowModal(true);
+
     try {
       setIsLoading(true);
       const response = await signInAPI.signIn(formData);
       const token = response.data.User.token;
       setIsLoading(false);
 
-      console.log("signin response", response);
-      console.log("signin token", token);
-
       if (response.statusCode === 200 && token) {
-        //  alert(response.message);
-       // setCookie("access_token", token, 7);
-        // Swal.fire({
-        //   title: "Login",
-        //   text: response.message,
-        //   icon: "success",
-        // }).then((result) => {
-        //   if (result.isConfirmed) {
-        //     navigate("/");
-        //   }
-        // });
+        setAlertShowModal(true);
+        setAlert({ ...alert, message: response.message, title: "Success" });
+        setCookie("access_token", token, 7);
         setFormData({ username: "", password: "" });
-      } else {
-        // alert(response.message);
-        Swal.fire({
-          title: "Login",
-          text: "Login failed",
-          icon: "error",
-        });
+        //setAlertShowModal(false);
       }
+      // else if (response.statusCode === 404) {
+      //   // alert(response.message);
+      //   setAlert({
+      //     ...alert,
+      //     message: response.message,
+      //     title: "Error",
+      //   });
+      // }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log("error", error);
-        // if (error.response?.data.statusCode === 409) {
-        // } else {
-        //   alert("Network error or server issue. Please try again later.");
-        // }
+        if (error.response?.data.statusCode === 404) {
+          setAlertShowModal(true);
+          setAlert({
+            ...alert,
+            message: error.response?.data.message,
+            title: "Error",
+          });
+        }
       }
     }
   };
@@ -213,11 +213,7 @@ function LoginModal() {
       </Modal>
       {/* {alertShowModal && (<AlertModal />)} */}
       {alertShowModal && (
-        <AlertModal
-          title="title1"
-          message="messge1"
-          showmodal={alertShowModal}
-        />
+        <AlertModal alertData={alert} showmodal={alertShowModal} />
       )}
     </div>
   );

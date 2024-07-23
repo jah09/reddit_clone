@@ -1,14 +1,29 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { FaRegCircleCheck } from "react-icons/fa6";
+import { CiCircleCheck, CiCircleRemove } from "react-icons/ci";
+import { AlertObject } from "@/components/modals/LoginModal";
+import { useNavigate } from "react-router-dom";
+
 interface AlertProps {
-  title: string;
-  message: string;
+  alertData: AlertObject;
   showmodal: boolean;
 }
-const Alert = ({ title, message, showmodal }: AlertProps) => {
+const Alert = ({ alertData, showmodal }: AlertProps) => {
+  //deconstruct the object
+  const { title, message } = alertData || { title: "", message: "" };
+
   //--state--
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(showmodal);
+  const navigate = useNavigate();
+
+  //event handle
+  const handleButtonClick = () => {
+    if (title == "Success") {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
       <Modal
@@ -19,11 +34,21 @@ const Alert = ({ title, message, showmodal }: AlertProps) => {
         <div className="inline-block text-left bg-white rounded-md shadow-2xl p-8 w-[39%] h-80">
           <div className=" bg-white flex justify-center flex-col items-center">
             <div>
-              <FaRegCircleCheck className="w-20 h-20  bg-white" />
+              {title == "Success" ? (
+                <CiCircleCheck className="w-20 h-20  bg-white text-green-600" />
+              ) : (
+                <CiCircleRemove className="w-20 h-20  bg-white text-red-600" />
+              )}
             </div>
-            <div className="mt-8 bg-white">
-              <h1 className="text-3xl font-semibold  bg-inherit">Login</h1>
-              <p className="bg-white text-lg mt-8">message</p>
+            <div className="mt-8  bg-white flex flex-col items-center">
+              <h1 className="text-3xl font-semibold  bg-inherit">{title}</h1>
+              <p className="bg-white text-lg mt-4">{message}</p>
+              <button
+                className="text-center bg-primary-accent mt-6 rounded-md w-24 py-3 text-lg text-text-primary font-semibold hover:bg-primary-accent-hover"
+                onClick={handleButtonClick}
+              >
+                OK
+              </button>
             </div>
           </div>
         </div>

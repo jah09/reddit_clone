@@ -74,16 +74,9 @@ function LoginModal() {
         setAlert({ ...alert, message: response.message, title: "Success" });
         setCookie("access_token", token, 7);
         setFormData({ username: "", password: "" });
-        //setAlertShowModal(false);
+        //
       }
-      // else if (response.statusCode === 404) {
-      //   // alert(response.message);
-      //   setAlert({
-      //     ...alert,
-      //     message: response.message,
-      //     title: "Error",
-      //   });
-      // }
+      //setAlertShowModal(false);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log("error", error);
@@ -98,6 +91,11 @@ function LoginModal() {
       }
     }
   };
+
+  //handle onConfirm alert
+  const handleOnConfirmAlert = () => {
+    console.log("alert",alert)
+  }
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
       <Modal
@@ -213,7 +211,11 @@ function LoginModal() {
       </Modal>
       {/* {alertShowModal && (<AlertModal />)} */}
       {alertShowModal && (
-        <AlertModal alertData={alert} showmodal={alertShowModal} />
+        <AlertModal
+          alertData={alert}
+          showmodal={alertShowModal}
+          onConfirm={() => handleOnConfirmAlert}
+        />
       )}
     </div>
   );

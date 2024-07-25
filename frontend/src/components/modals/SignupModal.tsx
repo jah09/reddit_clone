@@ -79,16 +79,6 @@ function SignupModal() {
 
       navigate("/login");
       setModalIsOpen(false);
-
-      //setCookie("access_token", response.token, 7);
-
-      // console.log("signup response", token);
-
-      // Swal.fire({
-      //   title: "Login",
-      //   text: "Login successfully!",
-      //   icon: "success",
-      // });
       setFormData({ username: "", password: "", karma: 0, displayname: "" });
     } catch (error) {
       if (axios.isAxiosError(error)) {

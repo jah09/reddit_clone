@@ -7,22 +7,24 @@ import { useNavigate } from "react-router-dom";
 interface AlertProps {
   alertData: AlertObject;
   showmodal: boolean;
+  onConfirm: () => void;
 }
-const Alert = ({ alertData, showmodal }: AlertProps) => {
+const Alert = ({ alertData, showmodal, onConfirm }: AlertProps) => {
   //deconstruct the object
   const { title, message } = alertData || { title: "", message: "" };
-
+  
   //--state--
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(showmodal);
   const navigate = useNavigate();
 
   //event handle
-  const handleButtonClick = () => {
-    if (title == "Success") {
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
+  const handleConfirm = () => {
+    onConfirm();
+    // if (title == "Success") {
+    //   navigate("/");
+    // } else {
+    //   navigate("/login");
+    // }
   };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
@@ -45,7 +47,7 @@ const Alert = ({ alertData, showmodal }: AlertProps) => {
               <p className="bg-white text-lg mt-4">{message}</p>
               <button
                 className="text-center bg-primary-accent mt-6 rounded-md w-24 py-3 text-lg text-text-primary font-semibold hover:bg-primary-accent-hover"
-                onClick={handleButtonClick}
+                onClick={handleConfirm}
               >
                 OK
               </button>

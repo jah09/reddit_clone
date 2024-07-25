@@ -4,37 +4,37 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
+import * as communityAPI from "@/services/community";
+import axios from "axios";
+import AlertModal from "@/components/alert/index";
 
 //strucure of the Rule Object
 interface Rule {
-  id: string; // Use string IDs for flexibility
-  value: string;
+  rule: string;
 }
 //strucure of the Flare Object
 interface Flare {
-  id: string; // Use string IDs for flexibility
-  value: string;
+  flare: string;
 }
 //strucure of the Subreddit Object
-interface SubReddit {
-  id: string;
-  name: string;
-  creatorId: string;
-  rules: Rule[];
-  flare: Flare[];
+export interface SubReddit {
+  subredditName: string;
+  subredditRuleDTOList: Rule[];
+  flareDTOS: Flare[];
 }
 
 function SubredditForm() {
   //--state--
   //form data of the Subreddit object
   const [formData, setFormData] = useState<SubReddit>({
-    id: uuidv4(),
-    name: "",
-    creatorId: uuidv4(), // Set initial value
-    rules: [{ id: uuidv4(), value: "" }],
-    flare: [{ id: uuidv4(), value: "" }],
+    subredditName: "",
+    subredditRuleDTOList: [{ rule: "" }],
+    flareDTOS: [{ flare: "" }],
   });
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
+  const [alertShowModal, setAlertShowModal] = useState<boolean>(false);
+  const [alert, setAlert] = useState<AlertObject>({ title: "", message: "" });
+
   const navigate = useNavigate();
 
   //--event handler--
@@ -45,11 +45,10 @@ function SubredditForm() {
 
   //handle add rule, click the btn then it will add a rule input field
   const handleAddNewRule = () => {
-    if (formData.rules.length < 3) {
-      const nextRuleId = uuidv4();
+    if (formData.subredditRuleDTOList.length < 3) {
       setFormData({
         ...formData,
-        rules: [...formData.rules, { id: nextRuleId, value: "" }],
+        subredditRuleDTOList: [...formData.subredditRuleDTOList, { rule: "" }],
       }); //...formData: Spreads the existing properties of formData to keep them.
       //rules: [...formData.rules, { ... }]: Creates a new rules array
       //formData.rules: Includes all existing rules.
@@ -57,11 +56,10 @@ function SubredditForm() {
   };
   //handle add flare, click the btn then it will add a flare input field
   const handleAddFlare = () => {
-    if (formData.flare.length < 3) {
-      const nextFlareId = uuidv4();
+    if (formData.flareDTOS.length < 3) {
       setFormData({
         ...formData,
-        flare: [...formData.flare, { id: nextFlareId, value: "" }],
+        flareDTOS: [...formData.flareDTOS, { flare: "" }],
       }); //...formData: Spreads the existing properties of formData to keep them.
       //flare: [...formData.flare, { ... }]: Creates a new flare array
       //formData.flare: Includes all existing flare.
@@ -80,37 +78,61 @@ function SubredditForm() {
   //get the input data for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number,
+    newIndex: number
   ) => {
+    // const newRules = formData.rules.map((rule, index) =>
+    //   index === newIndex ? { ...rule, value: event.target.value } : rule
+    // );
     //new rules
-    const newRules = formData.rules.map((rule, index) =>
-      index === newIndex ? { ...rule, value: event.target.value } : rule,
+    const newRules = formData.subredditRuleDTOList.map((rule, index) =>
+      index === newIndex ? { ...rule, rule: event.target.value } : rule
     );
-    setFormData({ ...formData, rules: newRules });
+
+    setFormData({ ...formData, subredditRuleDTOList: newRules });
   };
   //get the input data for the flare
   const handleInputChangeAddFlare = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number,
+    newIndex: number
   ) => {
     //new flare
-    const newflare = formData.flare.map((flare, index) =>
-      index === newIndex ? { ...flare, value: event.target.value } : flare,
+    const newflare = formData.flareDTOS.map((flare, index) =>
+      index === newIndex ? { ...flare, flare: event.target.value } : flare
     );
 
-    setFormData({ ...formData, flare: newflare });
+    setFormData({ ...formData, flareDTOS: newflare });
   };
 
   //handle for submit button or create subreddit
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      console.log("the form data", formData);
-      //1 create subreddit
-      //2 create rules entry
-      //handle success response
-    } catch (error) {}
+      const response = await communityAPI.storeCommunity(formData);
+       if (response.statusCode === 201 ) {
+         setAlertShowModal(true);
+         setAlert({ ...alert, message: response.message, title: "Success" });
+         setFormData({ subredditName: "", subredditRuleDTOList: [{}] , flareDTOS:[{}]});
+         //
+       }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.log("error", error);
+        //  if (error.response?.data.statusCode === 404) {
+        //    setAlertShowModal(true);
+        //    setAlert({
+        //      ...alert,
+        //      message: error.response?.data.message,
+        //      title: "Error",
+        //    });
+        //  }
+      }
+    }
   };
+
+  //handle alert button click
+  const handleAlertBtnClick = () => {
+   
+ }
   return (
     <div className=" sm:p-0 ">
       <Modal
@@ -145,10 +167,10 @@ function SubredditForm() {
                       required
                       type="text"
                       autoComplete="off"
-                      name="name"
-                      id="name"
+                      name="subredditName"
+                      id="subredditName"
                       onChange={handleInputchange}
-                      value={formData.name}
+                      value={formData.subredditName}
                       placeholder="Community name"
                       className="px-4 py-4 rounded-2xl w-full outline-none   focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary text-text-primary"
                     />
@@ -171,15 +193,13 @@ function SubredditForm() {
                       </button>
                     </div>
                     <div className="mt-4 bg-inherit">
-                      {formData.rules.map((rule, index) => (
+                      {formData.subredditRuleDTOList.map((rule, index) => (
                         <input
-                          key={rule.id} // Key is now the unique rule ID
+                          key={index}
                           type="text"
-                          name={rule.id}
                           required
-                          id={rule.id}
+                          defaultValue={rule.rule}
                           placeholder={`Rule ${index + 1}`}
-                          value={rule.value}
                           onChange={(e) => handleInputChangeRule(e, index)}
                           className="px-4 py-4 rounded-2xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary my-2"
                         />
@@ -200,16 +220,16 @@ function SubredditForm() {
                         </button>
                       </div>
                       <div className="mt-4 bg-inherit">
-                        {formData.flare.map((flare, key) => (
+                        {formData.flareDTOS.map((flare, index) => (
                           <input
-                            key={flare.id} // Key is now the unique rule ID
+                            key={index}
                             type="text"
-                            name={flare.id}
                             required
-                            id={flare.id}
-                            placeholder={`Flare ${key + 1}`}
-                            value={flare.value}
-                            onChange={(e) => handleInputChangeAddFlare(e, key)}
+                            defaultValue={flare.flare}
+                            placeholder={`Flare ${index + 1}`}
+                            onChange={(e) =>
+                              handleInputChangeAddFlare(e, index)
+                            }
                             className="px-4 py-4 rounded-2xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary my-2"
                           />
                         ))}
@@ -244,8 +264,8 @@ function SubredditForm() {
                   //   formData.rules.every((rule) => !rule.value)
                   // }
                   className={
-                    !formData.name ||
-                    formData.rules.every((rule) => !rule.value)
+                    !formData.subredditName ||
+                    formData.subredditRuleDTOList.every((rule) => !rule.rule)
                       ? "bg-primary-accent py-2 px-4 rounded-full font-medium text-text-primary mr-2  "
                       : "bg-primary-accent py-2 px-4 rounded-full font-medium text-text-primary mr-2"
                   }
@@ -257,6 +277,9 @@ function SubredditForm() {
           </form>
         </div>
       </Modal>
+      {alertShowModal && (
+        <AlertModal alertData={alert} showmodal={alertShowModal} />
+      )}
     </div>
   );
 }

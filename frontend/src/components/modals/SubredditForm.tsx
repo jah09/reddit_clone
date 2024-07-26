@@ -7,7 +7,7 @@ import { IoMdAdd } from "react-icons/io";
 import * as communityAPI from "@/services/community";
 import axios from "axios";
 import AlertModal from "@/components/alert/index";
-
+import { AlertObject } from "./LoginModal";
 //strucure of the Rule Object
 interface Rule {
   rule: string;
@@ -69,6 +69,7 @@ function SubredditForm() {
   //get the input data for the community name
   const handleInputchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -108,10 +109,11 @@ function SubredditForm() {
     event.preventDefault();
     try {
       const response = await communityAPI.storeCommunity(formData);
+      console.log("response in creating subbreddit", response);
        if (response.statusCode === 201 ) {
          setAlertShowModal(true);
          setAlert({ ...alert, message: response.message, title: "Success" });
-         setFormData({ subredditName: "", subredditRuleDTOList: [{}] , flareDTOS:[{}]});
+         setFormData({ subredditName: "", subredditRuleDTOList: [{rule:''}] , flareDTOS:[{flare:''}]});
          //
        }
     } catch (error) {
@@ -130,9 +132,19 @@ function SubredditForm() {
   };
 
   //handle alert button click
-  const handleAlertBtnClick = () => {
-   
- }
+  const handleOnConfirmAlert = () => {
+     if (alert.title === "Success") {
+       navigate("/");
+     } else {
+       setFormData({
+         subredditName: "",
+         subredditRuleDTOList: [{ rule: "" }],
+         flareDTOS: [{ flare: "" }],
+       });
+     }
+     setAlertShowModal(false); // Close the alert
+    
+  };
   return (
     <div className=" sm:p-0 ">
       <Modal
@@ -240,7 +252,7 @@ function SubredditForm() {
                 <div className=" w-[40%] bg-inherit ">
                   <div className="bg-background-primary rounded-2xl p-4 shadow-md shadow-black">
                     <p className="font-medium text-text-primary text-xl">
-                      r/communityname
+                      f/ {formData.subredditName}
                     </p>{" "}
                     <p className="text-text-secondary text-sm">
                       1 member . 1 online
@@ -278,7 +290,11 @@ function SubredditForm() {
         </div>
       </Modal>
       {alertShowModal && (
-        <AlertModal alertData={alert} showmodal={alertShowModal} />
+        <AlertModal
+          alertData={alert}
+          showmodal={alertShowModal}
+          onConfirm={handleOnConfirmAlert}
+        />
       )}
     </div>
   );

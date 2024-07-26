@@ -12,19 +12,13 @@ interface AlertProps {
 const Alert = ({ alertData, showmodal, onConfirm }: AlertProps) => {
   //deconstruct the object
   const { title, message } = alertData || { title: "", message: "" };
-  
+
   //--state--
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(showmodal);
-  const navigate = useNavigate();
 
   //event handle
   const handleConfirm = () => {
     onConfirm();
-    // if (title == "Success") {
-    //   navigate("/");
-    // } else {
-    //   navigate("/login");
-    // }
   };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">

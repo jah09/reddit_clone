@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import * as signInAPI from "@/services/user";
-import { getCookie, setCookie } from "@/utilities/cookie/cookie.ts";
+import {  setCookie } from "@/utilities/cookie/cookie.ts";
 import TestComponent from "@/components/TestComponent";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -65,6 +65,7 @@ function LoginModal() {
 
     try {
       setIsLoading(true);
+  
       const response = await signInAPI.signIn(formData);
       const token = response.data.User.token;
       setIsLoading(false);
@@ -94,8 +95,15 @@ function LoginModal() {
 
   //handle onConfirm alert
   const handleOnConfirmAlert = () => {
-    console.log("alert",alert)
-  }
+    if (alert.title === "Success") {
+      navigate("/");
+    } else {
+      setFormData((prev) => ({ ...prev, username: "", password: "" }));
+    }
+
+    setAlertShowModal(false); // Close the alert
+    setIsLoading(false);
+  };
   return (
     <div className="overflow-y-auto sm:p-0   pr-4 pl-4  ">
       <Modal
@@ -140,7 +148,7 @@ function LoginModal() {
                   required
                   name="username"
                   id="username"
-                  placeholder="Username"
+                  placeholder="Email"
                   onChange={handleInputChange}
                   className="px-4 py-4 rounded-3xl w-full outline-none text-text-primary focus-visible:ring-offset-0 focus-visible:ring-0 bg-background-primary"
                 />
@@ -214,7 +222,7 @@ function LoginModal() {
         <AlertModal
           alertData={alert}
           showmodal={alertShowModal}
-          onConfirm={() => handleOnConfirmAlert}
+          onConfirm={handleOnConfirmAlert}
         />
       )}
     </div>

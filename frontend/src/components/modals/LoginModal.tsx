@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import * as signInAPI from "@/services/user";
-import {  setCookie } from "@/utilities/cookie/cookie.ts";
+import { setCookie } from "@/utilities/cookie/cookie.ts";
 import TestComponent from "@/components/TestComponent";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -65,7 +65,7 @@ function LoginModal() {
 
     try {
       setIsLoading(true);
-  
+
       const response = await signInAPI.signIn(formData);
       const token = response.data.User.token;
       setIsLoading(false);

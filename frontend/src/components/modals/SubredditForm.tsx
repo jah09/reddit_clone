@@ -79,14 +79,14 @@ function SubredditForm() {
   //get the input data for the rules
   const handleInputChangeRule = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     // const newRules = formData.rules.map((rule, index) =>
     //   index === newIndex ? { ...rule, value: event.target.value } : rule
     // );
     //new rules
     const newRules = formData.subredditRuleDTOList.map((rule, index) =>
-      index === newIndex ? { ...rule, rule: event.target.value } : rule
+      index === newIndex ? { ...rule, rule: event.target.value } : rule,
     );
 
     setFormData({ ...formData, subredditRuleDTOList: newRules });
@@ -94,11 +94,11 @@ function SubredditForm() {
   //get the input data for the flare
   const handleInputChangeAddFlare = (
     event: React.ChangeEvent<HTMLInputElement>,
-    newIndex: number
+    newIndex: number,
   ) => {
     //new flare
     const newflare = formData.flareDTOS.map((flare, index) =>
-      index === newIndex ? { ...flare, flare: event.target.value } : flare
+      index === newIndex ? { ...flare, flare: event.target.value } : flare,
     );
 
     setFormData({ ...formData, flareDTOS: newflare });
@@ -110,12 +110,16 @@ function SubredditForm() {
     try {
       const response = await communityAPI.storeCommunity(formData);
       console.log("response in creating subbreddit", response);
-       if (response.statusCode === 201 ) {
-         setAlertShowModal(true);
-         setAlert({ ...alert, message: response.message, title: "Success" });
-         setFormData({ subredditName: "", subredditRuleDTOList: [{rule:''}] , flareDTOS:[{flare:''}]});
-         //
-       }
+      if (response.statusCode === 201) {
+        setAlertShowModal(true);
+        setAlert({ ...alert, message: response.message, title: "Success" });
+        setFormData({
+          subredditName: "",
+          subredditRuleDTOList: [{ rule: "" }],
+          flareDTOS: [{ flare: "" }],
+        });
+        //
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log("error", error);
@@ -133,17 +137,16 @@ function SubredditForm() {
 
   //handle alert button click
   const handleOnConfirmAlert = () => {
-     if (alert.title === "Success") {
-       navigate("/");
-     } else {
-       setFormData({
-         subredditName: "",
-         subredditRuleDTOList: [{ rule: "" }],
-         flareDTOS: [{ flare: "" }],
-       });
-     }
-     setAlertShowModal(false); // Close the alert
-    
+    if (alert.title === "Success") {
+      navigate("/");
+    } else {
+      setFormData({
+        subredditName: "",
+        subredditRuleDTOList: [{ rule: "" }],
+        flareDTOS: [{ flare: "" }],
+      });
+    }
+    setAlertShowModal(false); // Close the alert
   };
   return (
     <div className=" sm:p-0 ">

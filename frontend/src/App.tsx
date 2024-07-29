@@ -18,15 +18,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PublicRoute/>}>
-        <Route path="/login" element={<LoginModal />} />
-        <Route path="/signup" element={<SignupModal />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginModal />} />
+          <Route path="/signup" element={<SignupModal />} />
         </Route>
 
-
-        <Route
-          element={<PrivateRoute />}  
-        >
+        <Route element={<PrivateRoute />}>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/create-subreddit-form" element={<SubredditForm />} />

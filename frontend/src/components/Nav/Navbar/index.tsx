@@ -16,7 +16,7 @@ import { IoMdAdd } from "react-icons/io";
 import { LuBell } from "react-icons/lu";
 import { BsBoxArrowInRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
+import Tooltip from "@/components/Tooltip/Tooltip";
 function Navbar() {
   //--state---
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -51,73 +51,107 @@ function Navbar() {
           />
         </div>
 
-        {isLogin ? (
-          <div className="  w-96 px-2">
-            <div className="flex  gap-x-[2px] items-center  justify-end  ">
-              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+        <div className="  w-96 px-2">
+          <div className="flex  gap-x-[2px] items-center  justify-end  ">
+            <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+              <Tooltip
+                content="Advertise on reddit"
+                place="bottom"
+                className=" mt-1.5 rounded-md"
+                style={{ backgroundColor: "#b7cad4", color: "black" }}
+              >
                 <MdOutlineAdsClick className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
-              </div>
-              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+              </Tooltip>
+            </div>
+            <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+              <Tooltip
+                content="Open chat"
+                place="bottom"
+                className=" mt-1.5 rounded-md"
+                style={{ backgroundColor: "#b7cad4", color: "black" }}
+              >
                 <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-neutral   hover:rounded-full" />
-              </div>
+              </Tooltip>
+            </div>
+            <Tooltip
+              content="Create post"
+              place="bottom"
+              className=" mt-1.5 rounded-md"
+              style={{ backgroundColor: "#b7cad4", color: "black" }}
+            >
               <Link to="/create-post">
                 <button className="text-text-primary  flex items-center hover:bg-[#152030] hover:rounded-full  cursor-pointer py-1 px-2.5  *:">
                   <IoMdAdd className="w-7 h-7 text-neutral bg-transparent  " />
                   <span className="bg-transparent">Create</span>
                 </button>
               </Link>
-              <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+            </Tooltip>
+            <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
+              <Tooltip
+                content="Open inbox"
+                place="bottom"
+                className=" mt-1.5 rounded-md"
+                style={{ backgroundColor: "#b7cad4", color: "black" }}
+              >
                 <LuBell className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
-              </div>
-              <div className=" ">
+              </Tooltip>
+            </div>
+            <div className=" ">
+              <Tooltip
+                content="Open profile menu"
+                place="bottom-end"
+                className=" mt-1.5 rounded-md"
+                style={{ backgroundColor: "#b7cad4", color: "black" }}
+              >
                 <img
                   src={profile}
                   alt="mousecursor"
                   className="w-7 h-7 rounded-full ml-[2px]"
                 />
-              </div>
+              </Tooltip>
             </div>
           </div>
-        ) : (
-          <div className="  w-96 px-2 ">
-            <div className="flex gap-x-3 justify-end items-center    ">
-              <button className="text-text-primary rounded-full bg-primary-accent px-3 py-[6px] h-10 flex gap-x-2 items-center">
-                <span className="inline-block ">
-                  <img src={qrcode} alt="" className="w-6 h-6 bg-transparent" />
-                </span>
-                Get app
-              </button>
-              <Link to="/login">
-                <button className="text-text-primary rounded-full bg-primary px-3 py-[6px] h-10">
-                  Log In
-                </button>
-              </Link>
-              <div className="relative">
-                <div className="relative" onClick={handleClickKebabMenu}>
-                  <GoKebabHorizontal className="relative z-10 w-6 h-6 cursor-pointer text-neutral" />
-                </div>
-                {isKebabClicked && (
-                  <div className="absolute right-0  mt-5 w-72 bg-background-secondary text-text-primary rounded shadow-lg py-4 px-2">
-                    <div className="p-2  cursor-pointer flex mr-2 bg-inherit">
-                      <BsBoxArrowInRight className="w-[25px] h-[25px] mr-2 bg-inherit text-neutral" />
-                      <Link to="/login" className="bg-inherit">
-                        Log In / Sign Up
-                      </Link>
-                    </div>
-                    <div className="p-2  cursor-pointer flex focus:bg-gray-100 bg-inherit">
-                      <MdOutlineAdsClick className="w-[25px] h-[25px] mr-2  bg-inherit text-neutral" />
-                      Advertise on Reddit
-                    </div>
-                    <div className="p-2  cursor-pointer flex bg-inherit">
-                      <IoBagOutline className="w-[25px] h-[25px] mr-2 bg-inherit text-neutral" />
-                      Shop Collectible Avatars
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
+        {/*      
+          // <div className="  w-96 px-2 ">
+          //   <div className="flex gap-x-3 justify-end items-center    ">
+          //     <button className="text-text-primary rounded-full bg-primary-accent px-3 py-[6px] h-10 flex gap-x-2 items-center">
+          //       <span className="inline-block ">
+          //         <img src={qrcode} alt="" className="w-6 h-6 bg-transparent" />
+          //       </span>
+          //       Get app
+          //     </button>
+          //     <Link to="/login">
+          //       <button className="text-text-primary rounded-full bg-primary px-3 py-[6px] h-10">
+          //         Log In
+          //       </button>
+          //     </Link>
+          //     <div className="relative">
+          //       <div className="relative" onClick={handleClickKebabMenu}>
+          //         <GoKebabHorizontal className="relative z-10 w-6 h-6 cursor-pointer text-neutral" />
+          //       </div>
+          //       {isKebabClicked && ( 
+          //         <div className="absolute right-0  mt-5 w-72 bg-background-secondary text-text-primary rounded shadow-lg py-4 px-2">
+          //           <div className="p-2  cursor-pointer flex mr-2 bg-inherit">
+          //             <BsBoxArrowInRight className="w-[25px] h-[25px] mr-2 bg-inherit text-neutral" />
+          //             <Link to="/login" className="bg-inherit">
+          //               Log In / Sign Up
+          //             </Link>
+          //           </div>
+          //           <div className="p-2  cursor-pointer flex focus:bg-gray-100 bg-inherit">
+          //             <MdOutlineAdsClick className="w-[25px] h-[25px] mr-2  bg-inherit text-neutral" />
+          //             Advertise on Reddit
+          //           </div>
+          //           <div className="p-2  cursor-pointer flex bg-inherit">
+          //             <IoBagOutline className="w-[25px] h-[25px] mr-2 bg-inherit text-neutral" />
+          //             Shop Collectible Avatars
+          //           </div>
+          //         </div>
+          //       )}
+          //     </div>
+          //   </div>
+          // </div>
+     */}
       </div>
     </nav>
   );

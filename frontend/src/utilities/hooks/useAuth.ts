@@ -39,10 +39,9 @@ import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
   //getting token from local storage
   const userToken = getCookie("access_token");
-   
+
   //checking whether token is preset or not
   if (userToken) {
-   
     return true;
   } else {
     return false;

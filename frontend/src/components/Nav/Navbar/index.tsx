@@ -17,17 +17,19 @@ import { LuBell } from "react-icons/lu";
 import { BsBoxArrowInRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Tooltip from "@/components/Tooltip/Tooltip";
+import ProfileMenu from "@/components/Nav/Navbar/ProfileMenu";
 function Navbar() {
   //--state---
   const [isLogin, setIsLogin] = useState<boolean>(true);
   const [isKebabClicked, setIsKebabClicked] = useState<boolean>(false);
+  const [isShowProfileMenu, setIsShowProfileMenu] = useState<boolean>(false);
   //--event handler---
   //click the kebab and show the menu
   const handleClickKebabMenu = () => {
     setIsKebabClicked(!isKebabClicked);
   };
   return (
-    <nav className="w-full py-1.5 px-3 border-b border-neutral text-text-primary  ">
+    <nav className="w-full py-1.5 px-3 border-b border-neutral text-text-primary  relative">
       <div className="flex justify-between">
         <div className="text-3xl font-bold  text-primary  flex  items-center gap-x-2 justify-start ">
           <Link to="/" className="inline-flex">
@@ -60,7 +62,7 @@ function Navbar() {
                 className=" mt-1.5 rounded-md"
                 style={{ backgroundColor: "#b7cad4", color: "black" }}
               >
-                <MdOutlineAdsClick className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
+                <MdOutlineAdsClick className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit cursor-pointer" />
               </Tooltip>
             </div>
             <div className="w-[34px] h-[34px] hover:bg-[#152030] rounded-full flex items-center justify-center">
@@ -70,7 +72,7 @@ function Navbar() {
                 className=" mt-1.5 rounded-md"
                 style={{ backgroundColor: "#b7cad4", color: "black" }}
               >
-                <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-neutral   hover:rounded-full" />
+                <IoChatbubbleEllipsesOutline className="w-[25px] h-[25px] text-neutral   hover:rounded-full cursor-pointer" />
               </Tooltip>
             </div>
             <Tooltip
@@ -93,22 +95,28 @@ function Navbar() {
                 className=" mt-1.5 rounded-md"
                 style={{ backgroundColor: "#b7cad4", color: "black" }}
               >
-                <LuBell className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit" />
+                <LuBell className="w-[25px] h-[25px] text-neutral  hover:rounded-full bg-inherit cursor-pointer" />
               </Tooltip>
             </div>
             <div className=" ">
               <Tooltip
                 content="Open profile menu"
                 place="bottom-end"
-                className=" mt-1.5 rounded-md"
+                className=" mt-1 rounded-md"
                 style={{ backgroundColor: "#b7cad4", color: "black" }}
               >
                 <img
+                  onClick={() => {
+                    setIsShowProfileMenu(!isShowProfileMenu);
+                  }}
                   src={profile}
                   alt="mousecursor"
-                  className="w-7 h-7 rounded-full ml-[2px]"
+                  className="w-7 h-7 rounded-full ml-[2px] cursor-pointer"
                 />
               </Tooltip>
+            </div>
+            <div className=" bg-transparent absolute top-7 right-2">
+              <ProfileMenu isShowProfileMenu={isShowProfileMenu} />
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
 import * as communityAPI from "@/services/community";

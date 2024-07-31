@@ -28,6 +28,10 @@ function Navbar() {
   const handleClickKebabMenu = () => {
     setIsKebabClicked(!isKebabClicked);
   };
+
+  const handleShowProfileMenu = () => {
+    setIsShowProfileMenu(handlehowProfileMenu);
+  }
   return (
     <nav className="w-full py-1.5 px-3 border-b border-neutral text-text-primary  relative">
       <div className="flex justify-between">
@@ -116,7 +120,10 @@ function Navbar() {
               </Tooltip>
             </div>
             <div className=" bg-transparent absolute top-7 right-2">
-              <ProfileMenu isShowProfileMenu={isShowProfileMenu} />
+              <ProfileMenu
+                isShowProfileMenu={isShowProfileMenu}
+                handleShowProfileMenu={handleShowProfileMenu}
+              />
             </div>
           </div>
         </div>

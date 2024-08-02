@@ -30,8 +30,8 @@ function Navbar() {
   };
 
   const handleShowProfileMenu = () => {
-    setIsShowProfileMenu(handlehowProfileMenu);
-  }
+    setIsShowProfileMenu(!isShowProfileMenu);
+  };
   return (
     <nav className="w-full py-1.5 px-3 border-b border-neutral text-text-primary  relative">
       <div className="flex justify-between">
@@ -110,21 +110,18 @@ function Navbar() {
                 style={{ backgroundColor: "#b7cad4", color: "black" }}
               >
                 <img
-                  onClick={() => {
-                    setIsShowProfileMenu(!isShowProfileMenu);
-                  }}
+                  onClick={handleShowProfileMenu}
                   src={profile}
                   alt="mousecursor"
                   className="w-7 h-7 rounded-full ml-[2px] cursor-pointer"
                 />
               </Tooltip>
             </div>
-            <div className=" bg-transparent absolute top-7 right-2">
-              <ProfileMenu
-                isShowProfileMenu={isShowProfileMenu}
-                handleShowProfileMenu={handleShowProfileMenu}
-              />
-            </div>
+            {isShowProfileMenu && (
+              <div className=" bg-transparent absolute top-7 right-2">
+                <ProfileMenu handleShowProfileMenu={handleShowProfileMenu} />
+              </div>
+            )}
           </div>
         </div>
         {/*      
